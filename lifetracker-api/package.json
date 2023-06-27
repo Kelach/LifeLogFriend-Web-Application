@@ -4,15 +4,17 @@
   "description": "Express backend for the LifeTracker application",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --ignore 'db/*' server.js",
-    "dev-win": "set NODE_ENV=dev && nodemon --ignore 'db/*' server.js",
-    "dev": "NODE_ENV=dev nodemon --ignore 'db/*' server.js"
+    "start": "nodemon --ignore '/server/db/*' server.js",
+    "dev-win": "set NODE_ENV=dev && nodemon --ignore '/server/db/*' server.js",
+    "dev": "NODE_ENV=dev nodemon --ignore '/server/db/*' server.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
     "pg": "^8.11.1"
   },
