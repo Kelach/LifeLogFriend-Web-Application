@@ -3,9 +3,9 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 // ROUTES + CONFIGS
-const authRouter = require("./server/routes/auth")
-const { IS_TESTING } = require("./server/utils/config");
-const { NotFoundError } = require("./server/utils/errors");
+const authRouter = require("./routes/auth")
+const { IS_TESTING } = require("./utils/config");
+const { NotFoundError } = require("./utils/errors");
 //USING MIDDLEWARE
 const app = express();
 app.use(cors()); // cross origin resource sharing *need to restrict only to origin hosting front-end*
