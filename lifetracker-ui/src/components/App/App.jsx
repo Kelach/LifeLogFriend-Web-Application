@@ -1,16 +1,20 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
-import Home from "../Home/Home";
-import Activity from "../ActivityPage/ActivityPage";
-import { useReducer } from "react";
+import ActivityPage from "../../pages/ActivityPage/ActivityPage";
+import NutritionPage from "../../pages/NutritionPage/NutritionPage";
+import ExercisePage from "../../pages/ExercisePage/ExercisePage";
+import LandingPage from "../../pages/LandingPage/LandingPage";
+import SleepPage from "../../pages/SleepPage/SleepPage";
+import LoginPage from "../../pages/LoginPage/LoginPage";
+import SignUpPage from "../../pages/SignUpPage/SignUpPage";
+// import Navbar from "../Navbar/Navbar";
 
-import './App.css'
+import './App.css';
 
 function App() {
   const Overlay = () => {
     return (
       <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Outlet />
       </>
     )
@@ -20,7 +24,9 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes path="/" element={<Overlay />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage/>} />
           <Route path="/activity" element={<ActivityPage />} />
           <Route path="/nutrition" element={<NutritionPage />} />
           <Route path="/exercise" element={<ExercisePage />} />

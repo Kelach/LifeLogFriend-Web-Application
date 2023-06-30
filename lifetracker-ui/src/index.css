@@ -1,0 +1,58 @@
+:root {
+    --p-color: #05a0d4;
+    --s-color: #31e9b5;;
+    --highlight-p: #2F6690;
+    --highlight-s: #B26E63;
+    --accent-p: #AED9E0;
+    --accent-s: #B8F2E6;
+    --shadow-color-p: #AED9E0;
+    --background-color: ;
+    --text-color-dark: #1c1c1c;
+    --text-color-light: #e8ecf3;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+        "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.button-compact-large{
+    outline: solid 2px var(--p-color);
+    color:  var(--p-color);
+    border-width: 0px;
+    width: 100%;
+    max-width: 15rem;
+    font-size: 2.25rem;
+    padding: 0.75rem;
+    border-radius: 15px;
+    background-color: transparent;
+}
+.button-compact-large:hover, .button-compact-medium:hover, .button-compact-small:hover{
+    background-color: var(--p-color);
+    color:  var(--text-color-light);
+    cursor: pointer;
+}
+.floating {
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
+@keyframes floating {
+    0% {
+        transform: translate(0, 0px);
+    }
+
+    50% {
+        transform: translate(0, 15px) rotate(5deg);
+    }
+
+    100% {
+        transform: translate(0, -0px) rotate(-0deg);
+    }
+}
