@@ -1,12 +1,11 @@
 .input-text{
-    width: 100%;
     background-color: transparent;
     outline: solid var(--p-color) 2px;
     padding: 0.75rem;
     padding-left: 0.8rem;
     font-size: 1.1rem;
     border: 0px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 .input-text:focus{
     outline-color: var(--s-color);

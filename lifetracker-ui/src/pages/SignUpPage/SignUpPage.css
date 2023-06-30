@@ -1,0 +1,8 @@
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    padding: 10rem;
+}
+.name-inputs{
+    width: 100%;
+}

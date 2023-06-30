@@ -7,11 +7,13 @@ const authRouter = require("./routes/auth")
 const { IS_TESTING } = require("./utils/config");
 const { NotFoundError } = require("./utils/errors");
 const { requireAuthenticatedUser } = require("./middleware/security");
+
 //USING MIDDLEWARE
 const app = express();
 app.use(cors()); // cross origin resource sharing *need to restrict only to origin hosting front-end*
 app.use(express.json()); // json pre-processing
 app.use(morgan("tiny")); // console logging
+
 // ROUTES
 app.use("/auth", authRouter); // authentication routes handler
 // app.use("/user", requireAuthenticatedUser, userRouter); // TO BE IMPLEMENTED

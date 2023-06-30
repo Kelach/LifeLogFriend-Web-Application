@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./TextInput.css";
 export default function TextInput(props){
-    const {name = "text", onValueChange, value, placeholder, type} = props;
+    const {name = "text", onValueChange, value, placeholder, type, style} = props;
     return (
         <input 
         className="input-text"
@@ -9,6 +9,7 @@ export default function TextInput(props){
         onChange={onValueChange}
         value={value}
         name={name}
-        placeholder={placeholder}/>
+        placeholder={placeholder}
+        style={style}/>
     )
 }
