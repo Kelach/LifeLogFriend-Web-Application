@@ -1,7 +1,7 @@
 "use strict"
 
 const app = require("./app");
-const { PORT } = require("./server/utils/config");
+const { PORT } = require("./utils/config");
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
