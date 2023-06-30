@@ -57,6 +57,11 @@ class InvalidTokenError extends ExpressError {
     super(message, 403)
   }
 }
+class UnexpectedError extends ExpressError{
+  constructor(message = "Unexpected error as occured. Please try again later"){
+    super(message, 500)
+  }
+}
 
 module.exports = {
   ExpressError,
@@ -65,5 +70,6 @@ module.exports = {
   ForbiddenError,
   NotFoundError,
   UnprocessableEntityError,
-  InvalidTokenError
+  InvalidTokenError,
+  UnexpectedError
 }
