@@ -5,16 +5,12 @@ const { fetchUserByEmail } = require("../models/user");
 
 function getJWT(request){
     console.log(request.headers)
-    const processedHeader = request.headers["authorization"]?.split(" ");
-    console.log("processed header", processedHeader);
-    if (!processedHeader){
+    const authToken = request.headers["bearer"];
+    console.log("processed token: ", authToken);
+    if (!authToken){
         throw new UnauthorizedError("Invalid header found");
     }
-    console.log("getting heaer", processedHeader);
-    [authName, authToken] = processedHeader;
-    if (authName !== "Bearer")
-        throw new UnauthorizedError("Invalid header found");
-    console.log("extracted token: ", authToken)
+    console.log("getting bearer", authToken);
     return authToken;
 }
 async function getUserFromToken(request){
@@ -38,18 +34,19 @@ async function requireAuthenticatedUser(request, response, next){
         if (!user){
             console.log("access forbidden page");
             return next(new UnauthorizedError);
-
         }
+        console.log("valid users. access granted");
+        return next();
     } catch (error){
         // otherwise throw error
         if (error instanceof UnauthorizedError){
             console.log("Unauthorizaed user");
             return next(error);
         }
-        throw next(error);
+        return next(error);
     }
-    console.log("invalid user");
-    return next(new BadRequestError("Non-existent token"));
+    // console.log("invalid user");
+    // return next(new BadRequestError("Non-existent token"));
 }
 module.exports = {
     getUserFromToken,
