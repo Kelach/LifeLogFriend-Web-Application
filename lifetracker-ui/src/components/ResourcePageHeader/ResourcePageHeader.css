@@ -1,0 +1,12 @@
+.resource-header-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem;
+    background-color: green;
+  }
+  .resource-header-section-title{
+    margin: 0;
+    font-size: 3.5rem;
+  }
+  

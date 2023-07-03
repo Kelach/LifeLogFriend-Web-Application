@@ -26,7 +26,7 @@ function NavLinks() {
 
   return (
     <ul className="links">
-      {navLinks.map((navlink) => <NavLink {...navlink} />)}
+      {navLinks.map((navlink) => <NavLink key={navlink.linkText} {...navlink} />)}
     </ul >
   )
 }

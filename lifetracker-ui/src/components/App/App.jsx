@@ -7,12 +7,14 @@ import SleepPage from "../../pages/SleepPage/SleepPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignUpPage from "../../pages/SignUpPage/SignUpPage";
 import Navbar from "../Navbar/Navbar";
+import NutritionOverview from "../Nutrition/NutritionOverview";
+import NutritionNew from "../Nutrition/NutritionNew";
+import NutritionDetail from "../Nutrition/NutritionDetail";
 
 import './App.css';
 
 function App() {
   const Overlay = () => {
-    console.log("oetlet")
     return (
       <>
         <Navbar />
@@ -30,7 +32,11 @@ function App() {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/activity" element={<ActivityPage />} />
-            <Route path="/nutrition" element={<NutritionPage />} />
+            <Route path="/nutrition" element={<NutritionPage />}>
+              <Route path="/nutrition/" element={<NutritionOverview />} />
+              <Route path="/nutrition/create" element={<NutritionNew />}/>
+              <Route path="/nutrition/id/:nutritionID" element={<NutritionDetail />}/>
+            </Route>
             <Route path="/exercise" element={<ExercisePage />} />
             <Route path="/sleep" element={<SleepPage />} />
           </Route>
