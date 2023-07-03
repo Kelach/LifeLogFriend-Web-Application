@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
-import Logo from "../../assets/LifeLogFriendLogo.png"
+import Logo from "../../assets/logo.png"
 export default function LandingPage() {
 
     return (

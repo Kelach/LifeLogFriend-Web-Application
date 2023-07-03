@@ -7,9 +7,9 @@ export default function ActivityPage(){
         <>
         <h1>Activity Tings</h1>
         <div className="activity-feed-container">
-            <ActivityFeedCard title={""} change={0} value={0} />
-            <ActivityFeedCard title={""} change={0} value={0} />
-            <ActivityFeedCard title={""} change={0} value={0} />
+            <ActivityFeedCard title={"Exercise"} change={0} value={0} />
+            <ActivityFeedCard title={"Nutrition"} change={0} value={0} />
+            <ActivityFeedCard title={"Sleep"} change={0} value={0} />
             <div className="activity-summary-card">
                 <h3>activity summary tings</h3>
             </div>

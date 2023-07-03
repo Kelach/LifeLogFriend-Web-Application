@@ -18,6 +18,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+a{
+    text-decoration: none;
+}
 .button-compact-large{
     outline: solid 2px var(--p-color);
     color:  var(--p-color);

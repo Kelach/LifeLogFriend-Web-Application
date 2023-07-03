@@ -17,6 +17,7 @@
   color: var(--s-color);
 }
 .navbar-content{
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -26,4 +27,10 @@
   width: 100%;
   position: fixed;
   background-color: var(--p-color);
+}
+.logo img{
+  --size: 4rem;
+  height: var(--size);
+  width: var(--size);
+  background-color: #fff;
 }

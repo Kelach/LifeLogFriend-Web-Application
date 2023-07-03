@@ -1,12 +1,12 @@
 // import { } "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import "./Navbar.css"; 
 import "../../index.css"
-import Socials from "../Socials/Socials";
-import FittyLogo from "../../assets/fitty.png";
+// import Socials from "../Socials/Socials";
+import Logo from "../../assets/logo.png";
 
 function NavLinks() {
-  const NavLink = ({linkRoute, linkText}) => {
+  const NavLink = ({ linkRoute, linkText }) => {
     return (
       <li>
         <Link to={linkRoute}>
@@ -18,8 +18,8 @@ function NavLinks() {
     )
   }
   const navLinks = [
-    {linkText: "Activity", linkRoute: "/activity"},
-    {linkText: "Nutrition", linkRoute: "/nutrition"},
+    { linkText: "Activity", linkRoute: "/activity" },
+    { linkText: "Nutrition", linkRoute: "/nutrition" },
     // {linkText: "Home", linkRoute: "/"},
     // {linkText: "Home", linkRoute: "/"}
   ];
@@ -30,22 +30,18 @@ function NavLinks() {
     </ul >
   )
 }
-function Logo() {
-  return (
-    <div className="logo">
-      <a href="/">
-        <img src={FittyLogo} alt="Fitty logo" />
-      </a>
-    </div>
-  )
-}
-
 export default function Navbar() {
   return (
     <nav className="navbar" name="navigation-bar" >
+
       <div className="navbar-content">
-        <Logo />
+        <div className="logo">
+          <Link to={"/"}>
+            <img src={Logo} alt="Life Log Friend Logo" />
+          </Link>
+        </div>
         <NavLinks />
+
         {/* <Socials /> */}
       </div>
     </nav>
