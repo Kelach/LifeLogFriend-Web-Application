@@ -1,14 +1,36 @@
 "use strict";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TextInput from "../../components/TextInput/TextInput";
 import "./SignUpPage.css"
+
 export default function SignUpPage() {
-    const [formData, setFormData] = useState({});
+    // form state + navigator
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({ 
+        username: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        confirm_password: ""
+
+    });
+
+    // handles form data verification
+    const formDataIsValid = () => {
+        return true;
+    }
+    // handles form submissions
     const createNewUserAccount = (event) => {
         event.preventDefault();
-        console.log("User creation here")
+        if (formDataIsValid()){
+            navigate("/activity")
+        }
+
     }
+    // handles user keyboard presses
     const onValueChange = (event) => {
         const name = event.target.name
         const value = event.target.value
@@ -16,19 +38,25 @@ export default function SignUpPage() {
             ...formData,
             [name]: value
         }))
-        console.log(value, name)
+        console.log(formData);
 
     }
-    const formTextInputs = [{
-        name: "email",
-        placeholder: "Email Address"
-    }, {
-        name: "password",
-        placeholder: "Password"
-    }, {
-        name: "confirm_password",
-        placeholder: "Confirm Password"
-    }
+    // used for input text component mapping
+    const formTextInputs = [
+        {
+            name: "username",
+            placeholder: "Username"
+        },
+        {
+            name: "email",
+            placeholder: "Email Address"
+        }, {
+            name: "password",
+            placeholder: "Password"
+        }, {
+            name: "confirm_password",
+            placeholder: "Confirm Password"
+        }
     ]
     return (
         <div className="signup-container">
