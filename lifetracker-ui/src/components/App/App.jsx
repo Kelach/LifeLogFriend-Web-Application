@@ -14,7 +14,7 @@ import NutritionDetail from "../Nutrition/NutritionDetail";
 import './App.css';
 
 function App() {
-  const Overlay = () => {
+  const NavBarOverlay = () => {
     return (
       <>
         <Navbar />
@@ -27,7 +27,7 @@ function App() {
     <div className="app-container">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Overlay />}>
+          <Route path="/" element={<NavBarOverlay />}>
             <Route path="/" element={<LandingPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />

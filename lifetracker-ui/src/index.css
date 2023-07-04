@@ -37,6 +37,14 @@ a{
     color:  var(--text-color-light);
     cursor: pointer;
 }
+.box-shadow{
+    box-shadow: 1px 0px 7px -1px var(--text-color-dark);
+    transition: box-shadow 250ms ease-in-out;
+}
+.box-shadow:hover{
+    box-shadow: 1px 0px 11px -1px var(--text-color-dark);
+    
+}
 .floating {
     animation-name: floating;
     animation-duration: 3s;
