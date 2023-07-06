@@ -5,8 +5,10 @@
     --highlight-s: #B26E63;
     --accent-p: #AED9E0;
     --accent-s: #B8F2E6;
-    --shadow-color-p: #AED9E0;
-    --background-color: ;
+    --shadow-color-p: #defbff;
+    --bgc-p: #e7f9fb;
+    --bgc-s: #dafff4;
+    --bgc-light: #fcffff ;
     --text-color-dark: #1c1c1c;
     --text-color-light: #e8ecf3;
 }
@@ -17,25 +19,32 @@ body {
         "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bgc-light);
 }
 a{
     text-decoration: none;
 }
-.button-compact-large{
+.btn-compact-large, .btn-compact-medium, .btn-compact-small{
     outline: solid 2px var(--p-color);
     color:  var(--p-color);
     border-width: 0px;
     width: 100%;
+    background-color: transparent;
+    border-radius: 15px;
+}
+.btn-compact-large{
     max-width: 15rem;
     font-size: 2.25rem;
     padding: 0.75rem;
-    border-radius: 15px;
-    background-color: transparent;
 }
-.button-compact-large:hover, .button-compact-medium:hover, .button-compact-small:hover{
+.btn-compact-large:hover, .btn-compact-medium:hover, .btn-compact-small:hover{
     background-color: var(--p-color);
     color:  var(--text-color-light);
     cursor: pointer;
+}
+.btn-compact-medium{
+    font-size: 1.5rem;
+    padding: 0.5rem;
 }
 .box-shadow{
     box-shadow: 1px 0px 7px -1px var(--text-color-dark);
