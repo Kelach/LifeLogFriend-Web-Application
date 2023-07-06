@@ -21,8 +21,39 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--bgc-light);
 }
+.form-helper-text{
+    opacity: 0;
+    transition: opacity 100ms ease-in-out;
+    font-size: 1.2;
+    color: red;
+}
+.form-helper-text.show{
+    opacity: 1;
+}
 a{
     text-decoration: none;
+}
+.btn-outline-large, .btn-outline-medium, .btn-outline-small{
+    --main-color: var(--p-color);
+    outline: solid 2px var(--main-color);
+    color:  var(--main-color);
+    border-width: 0px;
+    width: 100%;
+    background-color: transparent;
+    border-radius: 15px;
+    transform: scale(0.99);
+    transition: all 180ms ease-in-out;
+
+}
+.btn-outline-large:hover, .btn-outline-medium:hover, .btn-outline-small:hover{
+    --main-color: var(--highlight-s);
+    cursor: pointer;
+    transform: scale(1);
+}
+.btn-outline-large{
+    max-width: 15rem;
+    font-size: 2.25rem;
+    padding: 0.75rem;
 }
 .btn-compact-large, .btn-compact-medium, .btn-compact-small{
     outline: solid 2px var(--p-color);
@@ -32,15 +63,15 @@ a{
     background-color: transparent;
     border-radius: 15px;
 }
-.btn-compact-large{
-    max-width: 15rem;
-    font-size: 2.25rem;
-    padding: 0.75rem;
-}
 .btn-compact-large:hover, .btn-compact-medium:hover, .btn-compact-small:hover{
     background-color: var(--p-color);
     color:  var(--text-color-light);
     cursor: pointer;
+}
+.btn-compact-large{
+    max-width: 15rem;
+    font-size: 2.25rem;
+    padding: 0.75rem;
 }
 .btn-compact-medium{
     font-size: 1.5rem;
