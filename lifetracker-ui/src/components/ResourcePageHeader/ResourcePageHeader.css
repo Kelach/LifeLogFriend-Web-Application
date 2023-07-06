@@ -1,12 +1,23 @@
-.resource-header-section{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8rem;
-    background-color: green;
-  }
-  .resource-header-section-title{
-    margin: 0;
-    font-size: 3.5rem;
-  }
-  
+.resource-header-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 0rem;
+  max-height: 10rem;
+  overflow: clip;
+}
+
+.resource-header-section-title {
+  z-index: 1;
+  margin: 0;
+  font-size: 5rem;
+  position: absolute;
+  color: white;
+
+}
+
+.resource-header-section img {
+  filter: brightness(0.5);
+  width: 100%;
+  height: 100%;
+}
