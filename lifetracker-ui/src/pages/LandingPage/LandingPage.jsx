@@ -13,7 +13,7 @@ export default function LandingPage() {
                         <h1>Friend</h1>
                         <p>Helping You <b>Reach Your Goals</b> Til' The End</p>
                         <Link to="/signup">
-                            <button className="sign-up-button button-compact-large">Sign Up</button>
+                            <button className="sign-up-btn btn-compact-large">Sign Up</button>
                         </Link>
 
                     </div>

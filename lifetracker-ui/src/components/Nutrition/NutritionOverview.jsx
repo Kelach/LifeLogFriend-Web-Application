@@ -47,9 +47,9 @@ function NutritionCard({ imageUrl, name, calories, category, createdAt, quantity
 export default function NutritionOverview() {
     return (
         <div className="nutrition-details-section">
-            <div className="add-nutrition-button">
+            <div className="add-nutrition-btn">
                 <Link to={"/nutrition/create"}>
-                    <button className="add-nutition-button">
+                    <button className="add-nutition-btn">
                         Add Nutition
                     </button>
                 </Link>

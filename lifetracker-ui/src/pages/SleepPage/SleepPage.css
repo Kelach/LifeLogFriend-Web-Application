@@ -1,6 +1,6 @@
-.SleepPage .button {
+.SleepPage .btn {
   display: flex;
 }
-.SleepPage .button button {
+.SleepPage .btn .btn {
   flex: 1;
 }

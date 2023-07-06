@@ -86,7 +86,7 @@ export default function SignUpPage() {
                             placeholder={placeholder} />)
                 }
                 )}
-                <button className="button-compact-large">Sign Up</button>
+                <button className="btn-compact-large">Sign Up</button>
 
 
             </form>
