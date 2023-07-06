@@ -8,7 +8,7 @@ import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignUpPage from "../../pages/SignUpPage/SignUpPage";
 import Navbar from "../Navbar/Navbar";
 import NutritionOverview from "../Nutrition/NutritionOverview";
-import NutritionNew from "../Nutrition/NutritionNew";
+import NutritionForm from "../Nutrition/NutritionForm";
 import NutritionDetail from "../Nutrition/NutritionDetail";
 
 import './App.css';
@@ -34,7 +34,7 @@ function App() {
             <Route path="/activity" element={<ActivityPage />} />
             <Route path="/nutrition" element={<NutritionPage />}>
               <Route path="/nutrition/" element={<NutritionOverview />} />
-              <Route path="/nutrition/create" element={<NutritionNew />}/>
+              <Route path="/nutrition/create" element={<NutritionForm />}/>
               <Route path="/nutrition/id/:nutritionID" element={<NutritionDetail />}/>
             </Route>
             <Route path="/exercise" element={<ExercisePage />} />
