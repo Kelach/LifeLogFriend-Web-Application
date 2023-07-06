@@ -2,12 +2,12 @@ import { useState } from "react";
 import TextInput from "../TextInput/TextInput";
 import CircleLoader from "../CircleLoader/CircleLoader";
 import "./NutritionForm.css";
+import ApiClient from "../../../services/apiClient";
 
 export default function NutritionForm() {
     /**
      * @todo
      * - fix circle loader to show error and success animations
-     * - style form (lightly)
      * - make nutrition details page using a general details component (pulling dummy data)
      * 
      * - make pseudo backend call to db to update nutrition
@@ -55,42 +55,16 @@ export default function NutritionForm() {
     const onNutritionFormSubmit = async (event) => {
         event.preventDefault();
         showLoader();
-        createNewNutritionEntry.then(() => {
-            console.log("loading finished");
+        const {success, statusCode, data } = await ApiClient.postEntry("/nutrition", formData);
+        if (success){
+            // update app state with data
             showSuccessLoader();
-        }).catch((error) => {
+            console.log("retrieve nutrition entry: ", data)
+        }else{
             showErrorLoader();
-            // showErrorMessage("Invalid entry. Review your responses try again.");
-            console.log(error);
-        });
-        // update nutrition db if form contains valid inputs
-        // otherwise show error message
+            console.log("error status code", statusCode)
+        }
     }
-    const createNewNutritionEntry = new Promise((myResolve, myReject) => {
-        // settimeout mimicks axios asychronous call
-        console.log("rendering promise");
-        setTimeout(() => {
-
-            if (!invalidForm()){
-                myResolve("apples");
-            }else{
-                myReject("error tingss");
-            }
-            //     // if (!invalidForm()) {
-            //     //     try {
-            //     //         // try to upload query here
-            //     //         console.log("valid form detected");
-            //     //     } catch (error) {
-            //     //         console.log("Unexpected error occured: ", error);
-            //     //         myReject("error tinffgs");
-            //     //     }
-            //     // } else {
-            //     //     console.log("return rejection");
-            //     //     myReject("error tings");
-            //     // }
-            //     // myResolve();
-        }, 3000);
-    });
     const onValueChange = (event) => {
         // updates form data values
         const name = event.target.name;
@@ -108,7 +82,7 @@ export default function NutritionForm() {
         <div className="nutrition-entry-container">
             <div className="nutrition-entry-content">
                 <div className="nutrition-entry-header">
-                    <h2>Add Nutrition Entry</h2>
+                    <h2>Add Nutrition</h2>
                 </div>
                 <form onSubmit={onNutritionFormSubmit} className="nutrition-entry-form">
                     <div className="nutrition-form-content box-shadow">
@@ -146,7 +120,7 @@ export default function NutritionForm() {
                         <button className="btn-compact-medium">Save</button>
                     </div>
                 </form>
-                <p className={"nutrition-form-helper-text" + (formOnSubmitState.errorMessage !== "" ? " show" : "")}>
+                <p className={"form-helper-text" + (formOnSubmitState.errorMessage !== "" ? " show" : "")}>
                     {formOnSubmitState.errorMessage}
                 </p>
             </div>
