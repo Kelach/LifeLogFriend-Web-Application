@@ -1,7 +1,6 @@
 .nutrition-entry-header{
     font-size: 2rem;
     color: var(--highlight-p);
-    margin-bottom: 2rem;
     text-decoration: underline;
     
 }
@@ -22,14 +21,14 @@
     width: 100%;
     max-width: 29rem;
     gap: 1rem;
-    transform: scale(1.2);
-    margin-bottom: 2rem;
+    /* transform: scale(1.2); */
 }
 .nutrition-entry-content{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 2rem;
 }
 .category-container select{
     border-radius: 15px;

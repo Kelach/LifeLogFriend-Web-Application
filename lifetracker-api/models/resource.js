@@ -1,6 +1,6 @@
 const db = require("../db"); // postrgres db
 const { validateFields } = require("../utils/validate");
-const { BadRequestError, UnauthorizedError } = require("../utils/errors");
+const { BadRequestError } = require("../utils/errors");
 
 class LifeTrackerResourceModel {
     constructor() {

@@ -8,6 +8,7 @@ nutritionRouter.post("/", async (request, response, next) => {
        const entry =  await Nutrition.createNutrition(request.body);
        response.status(201).json({"nutrition": entry})
     } catch (error){
+        console.log("Error posting entry")
         next(error);
     }
 

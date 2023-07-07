@@ -33,7 +33,6 @@ export default function NutritionForm() {
         setFormOnSubmitState(() => ({ ...formOnSubmitState, showErrorLoader: true }));
     }
     const showErrorMessage = (msg) => {
-        setFormOnSubmitState(() => ({ ...formOnSubmitState, errorMessage: msg }));
     }
     const loaderStates = {
         success: !formOnSubmitState.showErrorLoader && formOnSubmitState.showSuccess,
@@ -45,24 +44,23 @@ export default function NutritionForm() {
         category: "Food",
         quantity: 1
     });
-    const invalidForm = () => {
-        // determines whether form is invalid
-        return (formData.name == ""
-            || !formData.calories
-            || !formData.category
-            || !formData.quantity);
-    };
+
     const onNutritionFormSubmit = async (event) => {
         event.preventDefault();
         showLoader();
-        const {success, statusCode, data } = await ApiClient.postEntry("/nutrition", formData);
+        const {success, statusCode, data } = await ApiClient.postEntry("nutrition", formData);
         if (success){
             // update app state with data
             showSuccessLoader();
             console.log("retrieve nutrition entry: ", data)
         }else{
             showErrorLoader();
-            console.log("error status code", statusCode)
+            if (statusCode == 404){
+                const message = "Invalid response. Please review the required field and try again."
+                setFormOnSubmitState(({ ...formOnSubmitState, errorMessage: message }));
+            } else{
+                console.log("error with status code", statusCode)
+            }
         }
     }
     const onValueChange = (event) => {

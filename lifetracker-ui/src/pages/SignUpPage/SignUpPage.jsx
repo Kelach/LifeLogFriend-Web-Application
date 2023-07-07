@@ -1,17 +1,6 @@
 "use strict";
-// test login: 
-// request body: {
-//     username: 'jaynuff',
-//     first_name: 'John',
-//     last_name: 'Dow',
-//     email: 'jaynuff@gmail.com',
-//     password: 'apples123',
-//     confirm_password: 'apples123',
-//     firstName: 'John',
-//     lastName: 'Dow'
-//   }
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import TextInput from "../../components/TextInput/TextInput";
 import ApiClient  from "../../../services/apiClient";
 import "./SignUpPage.css"
@@ -75,35 +64,43 @@ export default function SignUpPage() {
         }))
         setInvalidMessage("");
         console.log(formData);
-
     }
     // used for input text component mapping
     const formTextInputs = [
         {
             name: "username",
-            placeholder: "Username"
+            placeholder: "Username",
+            type: "text",
+            helperText : {constraint: "non-empty", expression: formData.username === ""}
         },
         {
             name: "email",
-            placeholder: "Email Address"
+            placeholder: "Email Address",
+            type: "text",
+            helperText : {constraint: "non-empty", expression: formData.email === ""}
         }, {
             name: "password",
-            placeholder: "Password"
+            placeholder: "Password",
+            type: "password",
+            helperText : {constraint: "non-empty", expression: formData.password === ""}
         }, {
             name: "confirm_password",
-            placeholder: "Confirm Password"
+            placeholder: "Confirm Password",
+            type: "password",
+            helperText : {constraint: "match password", expression: formData.confirm_password !== formData.password}
         }
     ]
     return (
         <div className="signup-container">
-            <h1>Create An Account</h1>
-            <form className="signup-form" onSubmit={createNewUserAccount}>
+            <h1>Create Account</h1>
+            <span className="material-icons">person_outline</span>
+            <form className="signup-form box-shadow" onSubmit={createNewUserAccount}>
                 <div style={{ display: "flex" }} className="name-inputs">
                     <TextInput
                     style={{width: "100"}}
                         onChange={onValueChange}
                         value={formData.first_name}
-                        helperText={{constraint: "non-empty", expression: formData.first_name === ""}}
+                        helperText={{}}
                         name={"first_name"}
                         placeholder="First Name" />
                     <TextInput
@@ -114,13 +111,14 @@ export default function SignUpPage() {
                         placeholder="Last Name" />
                 </div>
                 {formTextInputs.map((textInputProps) => {
-                    const { name, placeholder } = textInputProps;
+                    const { name, placeholder, type, helperText } = textInputProps;
                     return (
                         <TextInput
                             key={name}
+                            type={type}
                             onChange={onValueChange}
                             value={formData[name]}
-                            helperText={{constraint: "non-empty", expression: formData[name] === ""}}
+                            helperText={helperText}
                             name={name}
                             placeholder={placeholder} />)
                 }
@@ -128,9 +126,10 @@ export default function SignUpPage() {
                 <p className={"form-helper-text" + (invalidMessage !== "" ? " show" : "")}>
                     {invalidMessage}
                 </p>
-                <button className="btn-compact-large">Sign Up</button>
-
-
+                <button className="btn-compact-large sign-up-btn">Sign Up</button>
+                <p className="returning-user">Already have an acount? Sign in
+                        <Link style={{color: "var(--highlight-p)"}} to={"/login"}> here.</Link>
+                </p>
             </form>
         </div>
     )
