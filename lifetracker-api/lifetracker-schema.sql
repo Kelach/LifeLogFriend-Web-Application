@@ -12,8 +12,8 @@ CREATE TABLE nutrition(
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     category TEXT NOT NULL,
-    calories TEXT NOT NULL,
-    image_url TEXT NOT NULL,
+    calories INT NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
     user_id TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL
 );

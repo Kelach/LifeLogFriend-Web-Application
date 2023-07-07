@@ -43,7 +43,7 @@ export default function NutritionForm() {
         name: "",
         calories: "",
         category: "Food",
-        quantity: ""
+        quantity: 1
     });
     const invalidForm = () => {
         // determines whether form is invalid

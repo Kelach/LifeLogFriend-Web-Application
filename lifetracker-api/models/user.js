@@ -22,7 +22,6 @@ class User {
         firstName: firstName,
         lastName: lastName,
         email: email,
-        // location: location,
       }
     }
 
@@ -64,7 +63,6 @@ class User {
    **/
 
   static async register(creds) {
-    console.log("starting tings")
     const requiredCreds = ["email", "password", "firstName", "lastName", "username"]
     try {
       validateFields({ required: requiredCreds, obj: creds, location: "user registration" })

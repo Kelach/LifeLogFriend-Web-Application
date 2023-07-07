@@ -70,6 +70,11 @@ class ApiClient{
         }
         return await this.request(requestOptions);
     }
+    async getEntryById(entryTpe, entryID){
+        const requestOptions = {
+            // TODO fill this out 
+        }
+    }
     async getEntries(){
 
     }
