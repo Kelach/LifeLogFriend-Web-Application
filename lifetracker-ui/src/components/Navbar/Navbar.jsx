@@ -1,16 +1,17 @@
 // import { } "react";
-import { Link } from "react-router-dom";
-import "./Navbar.css"; 
+import { Link, useNavigate } from "react-router-dom";
+import "./Navbar.css";
 import "../../index.css"
 // import Socials from "../Socials/Socials";
 import Logo from "../../assets/logo.png";
+import ApiClient from "../../../services/apiClient";
 
 function NavLinks() {
   const NavLink = ({ linkRoute, linkText }) => {
     return (
       <li>
         <Link to={linkRoute}>
-          <div className="social-link">
+          <div className="nav-link">
             {linkText}
           </div>
         </Link>
@@ -20,8 +21,8 @@ function NavLinks() {
   const navLinks = [
     { linkText: "Activity", linkRoute: "/activity" },
     { linkText: "Nutrition", linkRoute: "/nutrition" },
-    // {linkText: "Home", linkRoute: "/"},
-    // {linkText: "Home", linkRoute: "/"}
+    { linkText: "Exercise", linkRoute: "/exercise" },
+    { linkText: "Sleep", linkRoute: "/sleep" },
   ];
 
   return (
@@ -30,7 +31,17 @@ function NavLinks() {
     </ul >
   )
 }
-export default function Navbar() {
+export default function Navbar( {appState, setAppState } ) {
+  const naviate = useNavigate();
+  const logoutUser = () => {
+    localStorage.setItem("lifetracker_token", null)
+    ApiClient.setToken(null);
+    setAppState((initialState) => ({
+      ...initialState,
+      isAuthenticated: false
+    }));
+    naviate("/")
+  }
   return (
     <nav className="navbar" name="navigation-bar" >
 
@@ -41,7 +52,24 @@ export default function Navbar() {
           </Link>
         </div>
         <NavLinks />
-
+        <div className="auth-btns">
+          {
+            appState.isAuthenticated ?
+            (
+              <button onClick={logoutUser} className="btn-outline-medium auth-btn">Logout</button>
+            )
+            : (
+              <>
+                <Link to={"/login"}>
+                  <button className="btn-outline-medium auth-btn">Login</button>
+                </Link>
+                <Link to="/signup">
+                  <button className="btn-outline-medium auth-btn">SignUp</button>
+                </Link>
+              </>
+            )
+          }
+        </div>
         {/* <Socials /> */}
       </div>
     </nav>

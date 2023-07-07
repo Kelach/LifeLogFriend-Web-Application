@@ -17,6 +17,8 @@ app.use(express.json()); // json pre-processing
 app.use(morgan("tiny")); // console logging
 app.use("/auth", authRouter); // authentication routes handler
 app.use("/nutrition", nutritionRouter);  // @TODO - include security middleware
+app.use("/exercise", nutritionRouter);  // @TODO - include security middleware
+app.use("/sleep", nutritionRouter);  // @TODO - include security middleware
 
 // ROUTES
 

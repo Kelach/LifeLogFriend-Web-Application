@@ -5,7 +5,7 @@ import TextInput from "../../components/TextInput/TextInput";
 import ApiClient  from "../../../services/apiClient";
 import "./SignUpPage.css"
 
-export default function SignUpPage() {
+export default function SignUpPage({appState, setAppState}) {
     // form state + navigator
     const navigate = useNavigate();
     const [invalidMessage, setInvalidMessage] = useState("");
@@ -19,10 +19,6 @@ export default function SignUpPage() {
 
     });
 
-    // handles form data verification
-    const formDataIsValid = () => {
-        return true;
-    }
     // handles form submissions
     const createNewUserAccount = async (event) => {
         event.preventDefault();
@@ -34,7 +30,11 @@ export default function SignUpPage() {
                 lastName: formData.last_name
             });
         if (success) {
-            localStorage.setItem("token", data);
+            localStorage.setItem("lifetracker_token", data.token);
+            setAppState((initialState) => ({
+                ...initialState,
+                isAuthenticated: true
+            }))
             navigate("/activity");
             // navigate to activity page
             // store user token in local storage

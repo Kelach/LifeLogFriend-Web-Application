@@ -6,13 +6,16 @@ class ApiClient {
         this.remoteHostUrl = remoteHostUrl;
         this.token = null;
     }
-    async setToken() {
-
+    setToken(token) {
+        this.token = token
+    }
+    getToken(){
+        return this.token
     }
     async request({ method, bodyData, subDirectory }) {
 
         const response = await axios({
-            headers: { Bearer: this.token },
+            headers: { bearer: this.token },
             method: method,
             data: bodyData,
             url: API_BASE_URL + subDirectory
@@ -70,13 +73,22 @@ class ApiClient {
         console.log(result)
         return result;
     }
-    async getEntryById(entryTpe, entryID) {
+    async getEntryById(resourceType, entryID) {
+        // handles id specific entry retrievals
         const requestOptions = {
-            // TODO fill this out 
+            method: "get",
+            subDirectory: `/${resourceType}/${entryID}`
         }
+        return await this.request(requestOptions)
     }
-    async getEntries() {
-
+    async getEntries(resourceType, userId) {
+        // handles batch entry retrievals
+        const requestOptions = {
+            method: "get",
+            bodyData: {userId: userId},
+            subDirectory: `/${resourceType}`
+        }
+        return await this.request(requestOptions)
     }
 }
 

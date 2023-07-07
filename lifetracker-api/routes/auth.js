@@ -53,9 +53,10 @@ authRouter.post("/register", async (request, response, next) => {
 
 authRouter.post("/me", async (request, response) => {
     // request header should contain auth token
-    const user = getUserFromToken(request);
+    const user = await getUserFromToken(request);
+    console.log("user: ", user)
     if (user){
-        response.status(200).send({ user : user});
+        response.status(200).json({ user : user});
         return
     }
     throw new UnauthorizedError;

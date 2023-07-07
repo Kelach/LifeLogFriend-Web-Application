@@ -43,7 +43,11 @@ a{
     border-radius: 15px;
     transform: scale(0.99);
     transition: all 180ms ease-in-out;
-
+}
+.btn-outline-medium{
+    max-width: 15rem;
+    font-size: 1.25rem;
+    padding: 0.45rem;
 }
 .btn-outline-large:hover, .btn-outline-medium:hover, .btn-outline-small:hover{
     --main-color: var(--highlight-s);

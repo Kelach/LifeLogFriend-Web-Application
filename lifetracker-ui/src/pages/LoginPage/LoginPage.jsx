@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ApiClient from "../../../services/apiClient";
 import TextInput from "../../components/TextInput/TextInput";
 import "./LoginPage.css";
-export default function LoginPage(){
+export default function LoginPage({ appState, setAppState }){
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email : "",
@@ -25,9 +25,17 @@ export default function LoginPage(){
     const onUserLoginRequest = async (event) => {
         event.preventDefault();
         // showloader button loader here maybe?
-        const { success, data, statusCode } = await ApiClient.login(formData);
+        console.log("attempting login", formData);
+        const { success, data, statusCode } = await ApiClient.login(formData);// returns {token : ....}
+
         if (success) {
-            localStorage.setItem("token", data);
+            console.log(data) // 
+            localStorage.setItem("lifetracker_token", data.token);
+            console.log("saving token: ", data.token)
+            setAppState((initialState) => ({
+                ...initialState,
+                isAuthenticated: true
+            }))
             navigate("/activity");
             // navigate to activity page
             // store user token in local storage

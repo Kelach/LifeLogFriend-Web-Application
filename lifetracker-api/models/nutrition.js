@@ -21,9 +21,9 @@ class Nutrition /* extends LifeTrackerResourceModel */ {
         }
 
     }
-    static async listNutritionForUser(nutritionId) {
+    static async listNutritionForUser(userId) {
         try {
-            const nutritionEntries = await LifeTrackerResourceModel.listResourceEntriesForUser("nutrition", nutritionId)
+            const nutritionEntries = await LifeTrackerResourceModel.listResourceEntriesForUser("nutrition", userId)
             return nutritionEntries
         } catch (error) {
             throw error;

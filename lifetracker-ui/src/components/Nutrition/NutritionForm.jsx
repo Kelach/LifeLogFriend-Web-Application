@@ -4,7 +4,7 @@ import CircleLoader from "../CircleLoader/CircleLoader";
 import "./NutritionForm.css";
 import ApiClient from "../../../services/apiClient";
 
-export default function NutritionForm() {
+export default function NutritionForm({ setAppState }) {
     /**
      * @todo
      * - fix circle loader to show error and success animations

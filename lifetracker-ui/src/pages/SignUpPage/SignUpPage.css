@@ -9,6 +9,7 @@
     font-size: 3rem;
     color: var(--highlight-p);
     margin: 0.1rem 0rem;
+    text-decoration: underline;
 }
 .signup-container span.material-icons{
     font-size: 4.5rem;

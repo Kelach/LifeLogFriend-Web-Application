@@ -3,34 +3,55 @@
   flex-direction: row;
   list-style-type: none;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   gap: 6rem;
+  width: 100%;
+  font-size: 700;
 }
-.social-link {
+.nav-link {
   text-decoration: none;
   color: var(--text-color-light);
   border-radius: 20%;
   font-size: larger;
   transition: color 250ms ease-in-out;
+  font-size: 1.3rem;
 }
-.social-link:hover{
+.nav-link:hover{
   color: var(--s-color);
 }
 .navbar-content{
   height: 4rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  flex-direction: row;
 }
 .navbar{
   z-index: 101;
   width: 100%;
+  max-width: 93vw;
   position: fixed;
   background-color: var(--p-color);
+  padding: 0rem 4rem;
 }
 .logo img{
   --size: 4rem;
   height: var(--size);
   width: var(--size);
-  background-color: #fff;
+  background-color: transparent;
+  filter: brightness(500%);
+
+}
+.auth-btns{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 30rem;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+.btn-outline-medium.auth-btn{
+  max-width: 7rem;
+  background-color: var(--text-color-light);
 }

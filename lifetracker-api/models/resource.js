@@ -61,7 +61,7 @@ class LifeTrackerResourceModel {
         }
     }
     static async listResourceEntriesForUser(resourceType, userId) {
-        if (!userId) throw new BadRequestError("No userId was given");
+        if (!userId) throw new BadRequestError("No userId was given: ", userId);
         try{
             const result = await db.query(
                 `SELECT * FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1 `

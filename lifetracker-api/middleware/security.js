@@ -4,26 +4,31 @@ const { UnauthorizedError, InvalidTokenError, BadRequestError } = require("../ut
 const { fetchUserByEmail } = require("../models/user");
 
 function getJWT(request){
-    console.log(request.headers)
     const authToken = request.headers["bearer"];
     console.log("processed token: ", authToken);
     if (!authToken){
+        console.log("invalid header: ", request.headers)
         throw new UnauthorizedError("Invalid header found");
     }
     console.log("getting bearer", authToken);
     return authToken;
 }
 async function getUserFromToken(request){
-    const userToken = getJWT(request);
     try{
+        console.log()
+        const userToken = getJWT(request);
         const decodedToken = await validateToken(userToken);
         if (!decodedToken)
             throw new InvalidTokenError
         const user = await fetchUserByEmail(decodedToken.email);
         return user;
     } catch (error){
-        console.warn("Unexpected error: ", error);
-        throw UnexpectedError("unexpected error in getUserFromToken function: ", error);
+        if (error instanceof UnauthorizedError){
+            throw error
+        }else{
+            console.warn("Unexpected error: ", error);
+            throw UnexpectedError("unexpected error in getUserFromToken function: ", error);
+        }
     }
 }
 async function requireAuthenticatedUser(request, response, next){

@@ -50,6 +50,7 @@ class User {
       if (isValid === true) {
         return User._createPublicUser(user);
       }
+      console.log("user exists with different password");
     }
     throw new UnauthorizedError("Invalid username/password")
   }

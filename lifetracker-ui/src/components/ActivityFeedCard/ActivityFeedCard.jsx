@@ -1,11 +1,13 @@
+import "./ActivityFeedCard.css";
+export default function ActivityFeedCard({title, stat}){
 
-export default function ActivityFeedCard({title, value, change}){
     return (
         <>
+
         <div className="activity-feed-card-container">
-            <p>title: {title}</p>
-            <p>stat: {value}</p>
-            <p>value change: {change}</p>
+            <h3>{title}</h3>
+            <p>{stat.title}: {stat.value}</p>
+            <p>Last updated: {stat.timestamp}</p>
         </div>
         </>
     )
