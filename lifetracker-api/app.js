@@ -2,8 +2,10 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+
 // ROUTES + CONFIGS
-const authRouter = require("./routes/auth")
+const authRouter = require("./routes/auth");
+const nutritionRouter = require("./routes/nutrition");
 const { IS_TESTING } = require("./utils/config");
 const { NotFoundError } = require("./utils/errors");
 const { requireAuthenticatedUser } = require("./middleware/security");
@@ -13,15 +15,12 @@ const app = express();
 app.use(cors()); // cross origin resource sharing *need to restrict only to origin hosting front-end*
 app.use(express.json()); // json pre-processing
 app.use(morgan("tiny")); // console logging
+app.use("/auth", authRouter); // authentication routes handler
+app.use("/nutrition", nutritionRouter);  // @TODO - include security middleware
 
 // ROUTES
-app.use("/auth", authRouter); // authentication routes handler
-// app.use("/user", requireAuthenticatedUser, userRouter); // TO BE IMPLEMENTED
+
 // health check
-app.use("/me", requireAuthenticatedUser)
-app.get("/me", (request, response, next) => {
-  response.status(200).send({ "you is": "valid"});
-});
 app.get("/",  (req, res) => {
     return res.status(200).json({
       ping: "pong",
