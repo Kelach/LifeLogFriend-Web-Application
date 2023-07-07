@@ -1,9 +1,8 @@
-const db = require("../db") // postrgres db
-const LifeTrackerResourceModel  = require("./resource")
+// const db = require("../db") // postrgres db
+const LifeTrackerResourceModel = require("./resource")
 
-// extend from base class to implement fetches by iD
 class Nutrition /* extends LifeTrackerResourceModel */ {
-  
+
     static async createNutrition(data) {
         try {
             const newEntry = await LifeTrackerResourceModel.createNewResourceEntry("nutrition", data)
@@ -20,7 +19,7 @@ class Nutrition /* extends LifeTrackerResourceModel */ {
         } catch (error) {
             throw error;
         }
-        
+
     }
     static async listNutritionForUser(nutritionId) {
         try {
