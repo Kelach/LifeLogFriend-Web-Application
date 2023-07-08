@@ -6,7 +6,7 @@ const { fetchUserByEmail } = require("../models/user");
 function getJWT(request){
     const authToken = request.headers["bearer"];
     console.log("processed token: ", authToken);
-    if (!authToken || authToken == "null"){
+    if (authToken, !authToken || authToken == "undefined"){
         console.log("invalid header: ", request.headers)
         throw new UnauthorizedError("Invalid header found");
     }

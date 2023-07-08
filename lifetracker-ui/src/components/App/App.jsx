@@ -24,10 +24,10 @@ function App() {
     exercise: []
   });
   
-  useEffect( () => {
+  useEffect(() => {
     const fetchUser = async () => {
       const userToken = localStorage.getItem("lifetracker_token");
-      // console.log(userToken)
+      console.log(userToken)
       ApiClient.setToken(userToken);
       console.log("token: ", ApiClient.getToken());
       const userResponse = await ApiClient.fetchUserFromToken();

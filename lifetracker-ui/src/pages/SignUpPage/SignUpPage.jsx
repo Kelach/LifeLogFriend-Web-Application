@@ -30,7 +30,8 @@ export default function SignUpPage({appState, setAppState}) {
                 lastName: formData.last_name
             });
         if (success) {
-            localStorage.setItem("lifetracker_token", data.token);
+            console.log("setting token: ", data.user)
+            localStorage.setItem("lifetracker_token", data.user.token);
             setAppState((initialState) => ({
                 ...initialState,
                 isAuthenticated: true

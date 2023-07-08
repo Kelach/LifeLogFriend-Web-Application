@@ -6,6 +6,7 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 const { validateFields } = require("../utils/validate") 
 
 const { BCRYPT_WORK_FACTOR } = require("../utils/config")
+const { createUserJwt } = require("../utils/tokens")
 
 class User {
   /**
@@ -105,9 +106,9 @@ class User {
         Date.now()/1000]
     )
 
-    const user = result.rows[0]
-
-    return user
+    const userData = result.rows[0]
+    const userToken = createUserJwt({userID:  userData.id, userEmail : userData.email});
+    return {...userData, token: userToken}
   }
 
   /**
