@@ -7,9 +7,7 @@ class ApiClient {
         this.token = null;
     }
     setToken(token) {
-        if (token){
-            this.token = token
-        }
+        this.token = token
     }
     getToken(){
         return this.token
