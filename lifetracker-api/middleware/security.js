@@ -12,7 +12,7 @@ function getJWT(request){
     }
     console.log("getting bearer", authToken);
     return authToken;
-}
+};
 async function getUserFromToken(request){
     try{
         const userToken = getJWT(request);

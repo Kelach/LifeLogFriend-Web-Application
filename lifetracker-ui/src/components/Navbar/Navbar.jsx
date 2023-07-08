@@ -34,7 +34,7 @@ function NavLinks() {
 export default function Navbar( {appState, setAppState } ) {
   const navigate = useNavigate();
   const logoutUser = (event) => {
-    localStorage.setItem("lifetracker_token", null)
+    localStorage.setItem("lifetracker_token", "")
     ApiClient.setToken("");
     setAppState((initialState) => ({
       ...initialState,
