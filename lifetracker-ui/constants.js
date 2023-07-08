@@ -1,6 +1,6 @@
 const PRODUCTION_API_BASE_URL = "https://life-tracker-uwma.onrender.com";
 const DEVELOPMENT_API_BASE_URL = "http://localhost:3001";
-const production = false;
+const production = true;
 /**
  * @todo
  * change production url to development url
