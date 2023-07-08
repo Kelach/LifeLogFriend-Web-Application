@@ -38,6 +38,9 @@ By the end of this project you will be able to...
   - [ X ] Each activity tracked is given a unique ID for easy lookup.
 - [ X ] Deploy your website with Render. Check out our [Render Deployment Guide](https://courses.codepath.org/snippets/site/render_deployment_guide) for detailed instructions.
 
+## LOOM VIDEO
+https://www.loom.com/share/e96a0dd6b4894beba6ae47c692ff03c6?sid=4ae1e57a-35a3-446c-9c17-844ec6f3437c
+
 ### Stretch Features
 
 Implement any of the following features to improve the application:
