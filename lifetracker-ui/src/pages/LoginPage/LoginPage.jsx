@@ -48,6 +48,7 @@ export default function LoginPage({ appState, setAppState }){
                 // unexpected error
                 setInvalidMessage("Oh no! An error occured. Please try again later");
                 console.log("An Unexpected error occured", {success : success, statusCode : statusCode});
+                console.log(error)
             }
         }
     }

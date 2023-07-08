@@ -46,8 +46,11 @@ export default function SignUpPage({appState, setAppState}) {
 
             } else if (statusCode === 400){
                 setInvalidMessage("A user with that email address already exists!")
-            } else{
+            } else if (statusCode === 404){
                 // unexpected error
+                setInvalidMessage("Oh no! An error occured. Please try again later");
+                console.log("url not found", {success : success, statusCode : statusCode});
+            } else{
                 setInvalidMessage("Oh no! An error occured. Please try again later");
                 console.log("An Unexpected error occured", {success : success, statusCode : statusCode});
             }

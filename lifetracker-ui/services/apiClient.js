@@ -13,7 +13,7 @@ class ApiClient {
         return this.token
     }
     async request({ method, bodyData, subDirectory }) {
-
+        console.log(API_BASE_URL)
         const response = await axios({
             headers: { bearer: this.token },
             method: method,
