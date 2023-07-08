@@ -30,6 +30,7 @@ function App() {
       console.log(userToken)
       ApiClient.setToken(userToken);
       console.log("token: ", ApiClient.getToken());
+      console.log("token: ", userToken);
       const userResponse = await ApiClient.fetchUserFromToken();
       const nutritionDataReponse = await ApiClient.getEntries("nutrition", userResponse?.data?.user.email)
       const excerciseDataReponse = await ApiClient.getEntries("exercise", userResponse?.data?.user.email)
