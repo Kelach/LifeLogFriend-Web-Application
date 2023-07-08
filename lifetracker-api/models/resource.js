@@ -51,7 +51,13 @@ class LifeTrackerResourceModel {
     static async fetchResourceEntryById(resourceType, entryID) {
         try{
             const result = await db.query(
-                `SELECT * FROM ` + resourceType.toLowerCase() + ` WHERE id = $1`,
+                `SELECT id,
+                user_id AS "userId",
+                name,
+                category,
+                calories,
+                quantity,
+                created_at AS "createdAt" FROM ` + resourceType.toLowerCase() + ` WHERE id = $1`,
                 [entryID.toLowerCase()]
             )
             return result.rows[0]
@@ -64,7 +70,13 @@ class LifeTrackerResourceModel {
         if (!userId) throw new BadRequestError("No userId was given: ", userId);
         try{
             const result = await db.query(
-                `SELECT * FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1 `
+                `SELECT id, 
+                user_id AS "userId",
+                name,
+                category,
+                calories,
+                quantity,
+                created_at AS "createdAt" FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1 `
                 , [userId]
             )
             return result.rows // returns list of nutrition objects

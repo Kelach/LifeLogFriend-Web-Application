@@ -89,6 +89,9 @@ a{
     box-shadow: 1px 0px 11px -1px var(--text-color-dark);
     
 }
+.title{
+    font-size: 4.5rem;
+}
 .floating {
     animation-name: floating;
     animation-duration: 3s;

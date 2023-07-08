@@ -9,7 +9,7 @@ nutritionRouter.post("/", async (request, response, next) => {
         const entry = await Nutrition.createNutrition(request.body);
         response.status(201).json({ "nutrition": entry })
     } catch (error) {
-        console.log("Error posting entry")
+        console.log("Error posting entry", error)
         next(error);
     }
 
@@ -21,7 +21,7 @@ nutritionRouter.get("/", async (request, response, next) => {
         const entries = await Nutrition.listNutritionForUser(email);
         response.status(201).json({ "nutritions": entries });
     } catch (error) {
-        console.log(error)
+        console.log("error in nutrition route", error)
         next(error);
     }
 

@@ -1,50 +1,45 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react"; 
+import ResourceCard from "../ResourceCard/ResourceCard";
 import "./NutritionOverview.css";
-function NutritionCard({ imageUrl, name, calories, category, createdAt, quantity }) {
-    const getHealthScore = (calories, quantity) => {
-        /**
-         * @TODO 
-         * Calc health score based on calories per quantity
-         * Get Link to navigate to unique nutrition page
-         */
-        return (
-            <span style={{ color: "green" }}>Healthy</span>
-        )
+import ApiClient from "../../../services/apiClient";
+
+export default function NutritionOverview({ user }) {
+    const [nutritionEntries, setNutritionEntries] = useState([]);
+    useEffect(() => {
+        const getNutritionEntries = async () => {
+            const {success, data, statusCode} = await ApiClient.getEntries("nutrition", user?.email);
+            if (success){
+                setNutritionEntries(() => [...data.nutritions])
+            } else{
+                console.log("unable to retrieve new entries from db");
+            }
+            // get all nutrition entries for a given user
+        }
+        getNutritionEntries();
+    }, []);
+    const getCardObjFromEntry = (entry) => {
+        // converts nutrition entries list into card objects
+        // that can be passed down to ResourceCard comp
+        return {
+            name: entry.name,
+            createdAt: entry.createdAt,
+            cardDetails:[
+                {
+                    name: "calories",
+                    value: entry.calories
+                },
+                {
+                    name: "quantity",
+                    value: entry.quantity
+                },
+                {
+                    name: "category",
+                    value: entry.category
+                }
+            ]
+        };
     }
-    return (
-        <div className="nutrition-card">
-
-            <Link >
-                <div className="nutrition-card-content box-shadow">
-                    <div className="nutrition-card-category">
-                        <h3>
-                            {category}
-                        </h3>
-                    </div>
-                    <div className="nutrition-card-details">
-                        <div className="nutrition-card-details-header">
-                            <h3>
-                                {name}
-                            </h3>
-                            <div className="card-timestamp">
-                                <p>
-                                    {createdAt}
-                                </p>
-                            </div>
-                        </div>
-                        <div className="nutrition-card-details-summary">
-                            <p>Calories: {calories}</p>
-                            <p>Quantity: {quantity}</p>
-                            <p>Health Score: {getHealthScore(calories, quantity)}</p>
-                        </div>
-                    </div>
-                </div>
-            </Link>
-
-        </div>
-    )
-}
-export default function NutritionOverview() {
     return (
         <div className="nutrition-details-section">
             <div className="add-nutrition-btn">
@@ -55,11 +50,17 @@ export default function NutritionOverview() {
                 </Link>
             </div>
             <div className="nutrition-history">
-                <NutritionCard name="Burger"
+                {nutritionEntries.map((entry, index) => {
+                    const nutritionCardObj = getCardObjFromEntry(entry);
+                    return (
+                        <ResourceCard key={entry.id} {...nutritionCardObj} />
+                    )
+                })}
+                {/* <ResourceCard name="Burger"
                     calories={"900"}
                     createdAt={"timestamp here"}
                     quantity={"quantity here"}
-                    category={"Food"} />
+                    category={"Food"} /> */}
             </div>
         </div>
     )

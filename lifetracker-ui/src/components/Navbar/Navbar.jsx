@@ -32,15 +32,15 @@ function NavLinks() {
   )
 }
 export default function Navbar( {appState, setAppState } ) {
-  const naviate = useNavigate();
-  const logoutUser = () => {
+  const navigate = useNavigate();
+  const logoutUser = (event) => {
     localStorage.setItem("lifetracker_token", null)
-    ApiClient.setToken(null);
+    ApiClient.setToken("");
     setAppState((initialState) => ({
       ...initialState,
       isAuthenticated: false
     }));
-    naviate("/")
+    navigate("/");
   }
   return (
     <nav className="navbar" name="navigation-bar" >
@@ -61,7 +61,7 @@ export default function Navbar( {appState, setAppState } ) {
             : (
               <>
                 <Link to={"/login"}>
-                  <button className="btn-outline-medium auth-btn">Login</button>
+                  <button onClick={logoutUser} className="btn-outline-medium auth-btn">Login</button>
                 </Link>
                 <Link to="/signup">
                   <button className="btn-outline-medium auth-btn">SignUp</button>

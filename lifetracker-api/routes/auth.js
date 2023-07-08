@@ -51,15 +51,23 @@ authRouter.post("/register", async (request, response, next) => {
     }
 });
 
-authRouter.post("/me", async (request, response) => {
+authRouter.post("/me", async (request, response, next) => {
     // request header should contain auth token
-    const user = await getUserFromToken(request);
-    console.log("user: ", user)
-    if (user){
-        response.status(200).json({ user : user});
-        return
+    try {
+        const user = await getUserFromToken(request);
+        console.log("user: ", user)
+        if (user) {
+            response.status(200).json({ user: user });
+            return
+        }
+    } catch (error) {
+        if (error instanceof UnauthorizedError) {
+            console.log("throwing un auth erorry")
+            next(error)
+        } else {
+            // console.log("unexpected error occured: ", error)
+        }
     }
-    throw new UnauthorizedError;
 });
 // handle login and regisration with the User model
 

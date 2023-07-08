@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 const { validateToken } = require("../utils/tokens");
-const { UnauthorizedError, InvalidTokenError, BadRequestError } = require("../utils/errors");
+const { UnauthorizedError, InvalidTokenError, UnexpectedError } = require("../utils/errors");
 const { fetchUserByEmail } = require("../models/user");
 
 function getJWT(request){
     const authToken = request.headers["bearer"];
     console.log("processed token: ", authToken);
-    if (!authToken){
+    if (!authToken || authToken == "null"){
         console.log("invalid header: ", request.headers)
         throw new UnauthorizedError("Invalid header found");
     }
@@ -15,8 +15,8 @@ function getJWT(request){
 }
 async function getUserFromToken(request){
     try{
-        console.log()
         const userToken = getJWT(request);
+        console.log("user token: ", userToken);
         const decodedToken = await validateToken(userToken);
         if (!decodedToken)
             throw new InvalidTokenError
@@ -47,8 +47,9 @@ async function requireAuthenticatedUser(request, response, next){
         if (error instanceof UnauthorizedError){
             console.log("Unauthorizaed user");
             return next(error);
+        } else{
+            return next(error);
         }
-        return next(error);
     }
     // console.log("invalid user");
     // return next(new BadRequestError("Non-existent token"));

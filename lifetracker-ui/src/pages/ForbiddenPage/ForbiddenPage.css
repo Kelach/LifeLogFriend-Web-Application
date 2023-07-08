@@ -1,0 +1,27 @@
+.forbidden-page-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10rem;
+}
+.forbidden-page-container h1{
+    margin: 0;
+    font-size: 6rem;
+}
+.forbidden-page-container h2{
+    margin: 0;
+    font-size: 2rem;
+}
+.forbidden-page-container h2 a{
+    color: var(--p-color);
+    text-decoration: underline;
+}
+
+.forbidden-page-container span{
+    font-size: 10rem;
+    margin-bottom: 1rem;
+    color: red;
+}
+
+
+

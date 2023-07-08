@@ -3,8 +3,9 @@ import TextInput from "../TextInput/TextInput";
 import CircleLoader from "../CircleLoader/CircleLoader";
 import "./NutritionForm.css";
 import ApiClient from "../../../services/apiClient";
+import { useNavigate } from "react-router-dom";
 
-export default function NutritionForm({ setAppState }) {
+export default function NutritionForm({ setAppState, user}) {
     /**
      * @todo
      * - fix circle loader to show error and success animations
@@ -13,6 +14,7 @@ export default function NutritionForm({ setAppState }) {
      * - make pseudo backend call to db to update nutrition
      * - start working on API state management
      */
+    const navigate = useNavigate();
     const [formOnSubmitState, setFormOnSubmitState] = useState({
         showLoader: false,
         errorMessage: "",
@@ -48,14 +50,15 @@ export default function NutritionForm({ setAppState }) {
     const onNutritionFormSubmit = async (event) => {
         event.preventDefault();
         showLoader();
-        const {success, statusCode, data } = await ApiClient.postEntry("nutrition", formData);
+        const {success, statusCode, data } = await ApiClient.postEntry("nutrition", {...formData, userId: user.email});
         if (success){
             // update app state with data
             showSuccessLoader();
-            console.log("retrieve nutrition entry: ", data)
+            console.log("retrieve nutrition entry: ", data);
+            navigate("/nutrition");
         }else{
             showErrorLoader();
-            if (statusCode == 404){
+            if (statusCode == 422){
                 const message = "Invalid response. Please review the required field and try again."
                 setFormOnSubmitState(({ ...formOnSubmitState, errorMessage: message }));
             } else{
@@ -122,10 +125,10 @@ export default function NutritionForm({ setAppState }) {
                     {formOnSubmitState.errorMessage}
                 </p>
             </div>
-                <CircleLoader
+                {/* <CircleLoader
                     showLoading={formOnSubmitState.showLoader}
                     isFailure={loaderStates.failure}
-                    isSuccess={loaderStates.success} />
+                    isSuccess={loaderStates.success} /> */}
         </div>
 
     )

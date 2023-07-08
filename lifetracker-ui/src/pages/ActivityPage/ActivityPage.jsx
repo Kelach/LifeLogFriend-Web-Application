@@ -1,12 +1,14 @@
 import ApiClient from "../../../services/apiClient";
 import { useEffect, useState } from "react";
 import ActivityFeedCard from "../../components/ActivityFeedCard/ActivityFeedCard";
-export default function ActivityPage( { user } ){
-    // const [resourceStats, setResourceStats] = useState({
-    //     nutritionStat: null,
-    //     exerciseStat: null,
-    //     sleepStat: null
-    // });
+import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
+import "./ActivityPage.css";
+export default function ActivityPage({ user, isAuthenticated }) {
+    const [resourceStats, setResourceStats] = useState({
+        nutritionStat: null,
+        exerciseStat: null,
+        sleepStat: null
+    });
 
     // // main page after login.
     // useEffect(() => {
@@ -32,14 +34,21 @@ export default function ActivityPage( { user } ){
     //         )
     // }, []);
     return (
-        <>
-        <h1>Welcome {user.firstName} </h1>
-        <h2>Activity Tings</h2>
-        {/* <div className="activity-feed-container">
-            <ActivityFeedCard title={"Exercise"} stat={exerciseStat} />
-            <ActivityFeedCard title={"Nutrition"} stat={nutritionStat} />
-            <ActivityFeedCard title={"Sleep"} stat={sleepStat} />
-        </div> */}
-        </>
+        isAuthenticated ?
+            (
+                <div className="activity-feed-container">
+                    <h1 className="title">Welcome <span style={{ color: "var(--p-color)", textDecoration: "underline" }}>{user?.firstName}</span></h1>
+                    <div className="activity-dashboard-container">
+                        <h2>Activity Dashboard</h2>
+                        <div className="activity-summary-cards">
+                            {/* <ActivityFeedCard title={"Nutrition"} stat={nutritionStat} /> */}
+                        </div>
+                        {/* <ActivityFeedCard title={"Exercise"} stat={exerciseStat} />
+            <ActivityFeedCard title={"Sleep"} stat={sleepStat} /> */}
+                    </div>
+                </div>) :
+            (
+                <ForbiddenPage />
+            )
     )
 }

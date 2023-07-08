@@ -20,7 +20,6 @@ export default function LoginPage({ appState, setAppState }){
             [name]: value
         }))
         setInvalidMessage("");
-        console.log(formData);
     }
     const onUserLoginRequest = async (event) => {
         event.preventDefault();
@@ -29,7 +28,6 @@ export default function LoginPage({ appState, setAppState }){
         const { success, data, statusCode } = await ApiClient.login(formData);// returns {token : ....}
 
         if (success) {
-            console.log(data) // 
             localStorage.setItem("lifetracker_token", data.token);
             console.log("saving token: ", data.token)
             setAppState((initialState) => ({

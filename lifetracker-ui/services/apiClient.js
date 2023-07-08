@@ -67,7 +67,7 @@ class ApiClient {
         const requestOptions = {
             method: "post",
             bodyData: entryData,
-            subDirectory: `/${entryType}/create`
+            subDirectory: `/${entryType}`
         }
         const result = await this.request(requestOptions);
         console.log(result)

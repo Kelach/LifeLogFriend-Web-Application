@@ -1,15 +1,19 @@
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import ResourcePageHeader from "../../components/ResourcePageHeader/ResroucePageHeader";
+import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 import "./NutritionPage.css";
 
-export default function NutritionPage() {
+export default function NutritionPage({ isAuthenticated }) {
     return (
-        <div className="nutrition-page-container">
+        isAuthenticated ? 
+        (<div className="nutrition-page-container">
             <ResourcePageHeader title="Nutrition"
             imageFileName="food.jpg"
             imageAlt={"Cutting board with food"} />
             <Outlet />
-        </div>
+        </div>) :
+        <ForbiddenPage />
 
     )
 }
