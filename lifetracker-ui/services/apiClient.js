@@ -17,7 +17,7 @@ class ApiClient {
     async request({ method, bodyData, subDirectory }) {
         console.log(API_BASE_URL)
         const response = await axios({
-            headers: { bearer: this.token },
+            headers: { bearer: this.token || ""},
             method: method,
             data: bodyData,
             url: API_BASE_URL + subDirectory
