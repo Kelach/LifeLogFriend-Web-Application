@@ -35,14 +35,15 @@ export default function Navbar( {appState, setAppState } ) {
   const navigate = useNavigate();
   const logoutUser = (event) => {
     event.preventDefault();
+    // clear token from local storage, and app client
     localStorage.setItem("lifetracker_token", "");
     ApiClient.setToken("");
-    console.log("navbar token: ", ApiClient.getToken())
-    // setAppState((initialState) => ({
-    //   ...initialState,
-    //   isAuthenticated: false
-    // }));
-    // navigate("/");
+    // update auth state
+    setAppState((initialState) => ({
+      ...initialState,
+      isAuthenticated: false
+    }));
+    navigate("/");
   }
   return (
     <nav className="navbar" name="navigation-bar" >

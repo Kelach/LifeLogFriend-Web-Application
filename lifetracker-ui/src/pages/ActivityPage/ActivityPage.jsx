@@ -4,6 +4,7 @@ import ActivityFeedCard from "../../components/ActivityFeedCard/ActivityFeedCard
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 import "./ActivityPage.css";
 export default function ActivityPage({ user, isAuthenticated }) {
+
     const [resourceStats, setResourceStats] = useState({
         nutritionStat: null,
         exerciseStat: null,
@@ -13,9 +14,9 @@ export default function ActivityPage({ user, isAuthenticated }) {
     // // main page after login.
     // useEffect(() => {
     //     // get all tracker stats
-    //     const nutritionResponse = await ApiClient.getSum("nutrition", "calories", user.email)
-    //     const exerciseResponse = await ApiClient.getSum("exercise", "duration", user.email)
-    //     const sleepResponse = await ApiClient.getAvergae("sleep", "duration", user.email)
+    //     const nutritionResponse = await ApiClient.getSum("nutrition", "calories")
+    //     const exerciseResponse = await ApiClient.getSum("exercise", "duration")
+    //     const sleepResponse = await ApiClient.getAvergae("sleep", "duration")
 
     //     setResourceStats((initialData) => ({
     //         ...initialData,
@@ -37,12 +38,20 @@ export default function ActivityPage({ user, isAuthenticated }) {
         isAuthenticated ?
             (
                 <div className="activity-feed-container">
-                    <h1 className="title">Welcome <span style={{ color: "var(--p-color)", textDecoration: "underline" }}>{user?.firstName}</span></h1>
-                    <div className="activity-dashboard-container">
+                    <div className="activity-feed-header box-shadow">
+                        <h1 className="title">Welcome <span style={{ color: "var(--p-color)", textDecoration: "underline" }}>
+                                  {user?.firstName}
+                            </span>
                         <h2>Activity Dashboard</h2>
+                        </h1>
+                    </div>
+                    <div className="activity-dashboard-container">
                         <div className="activity-summary-cards">
-                            {/* <ActivityFeedCard title={"Nutrition"} stat={nutritionStat} /> */}
+                        <ActivityFeedCard />
+                        <ActivityFeedCard />
+                        <ActivityFeedCard />
                         </div>
+                            {/* <ActivityFeedCard title={"Nutrition"} stat={nutritionStat} /> */}
                         {/* <ActivityFeedCard title={"Exercise"} stat={exerciseStat} />
             <ActivityFeedCard title={"Sleep"} stat={sleepStat} /> */}
                     </div>

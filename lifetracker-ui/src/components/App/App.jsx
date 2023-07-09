@@ -10,9 +10,10 @@ import SignUpPage from "../../pages/SignUpPage/SignUpPage";
 import Navbar from "../Navbar/Navbar";
 import NutritionOverview from "../Nutrition/NutritionOverview";
 import NutritionForm from "../Nutrition/NutritionForm";
-import NutritionDetail from "../Nutrition/NutritionDetail";
+import NutritionDetail from "../../pages/ResourceDetailsPage.jsx/ResourceDetailsPage";
 import './App.css';
 import ApiClient from "../../../services/apiClient";
+import ResourceDetailsPage from "../../pages/ResourceDetailsPage.jsx/ResourceDetailsPage";
 
 function App() {
   console.log("app reloading")
@@ -55,6 +56,8 @@ function App() {
       } else {
         // set isAuth to false if no token exists in 
         // local storage
+
+        console.log("unauthenticate user", statusCode)
         if (statusCode == 401){
           console.log("error fetching user data: ", statusCode)
           setAppState((initialState) => ({
@@ -89,7 +92,7 @@ function App() {
             <Route path="/nutrition" element={<NutritionPage  {...appState} />}>
               <Route path="/nutrition/" element={<NutritionOverview {...appState} />} s />
               <Route path="/nutrition/create" element={<NutritionForm user={appState.user} setAppState={setAppState} />} />
-              <Route path="/nutrition/id/:nutritionID" element={<NutritionDetail />} />
+              <Route path="/nutrition/id/:nutritionID" element={<ResourceDetailsPage resourceType="nutrition" />} />
             </Route>
             <Route path="/exercise" element={<ExercisePage {...appState} />} />
             <Route path="/sleep" element={<SleepPage />} />

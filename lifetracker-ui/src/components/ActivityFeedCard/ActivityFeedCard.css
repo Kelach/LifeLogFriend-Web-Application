@@ -1,0 +1,44 @@
+.activity-feed-card-container{
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    margin: 1.5rem;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 30rem;
+}
+.feed-card-header{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--highlight-p);
+    color: var(--text-color-light);
+    border-radius: 10px;
+    padding: 0rem 1rem;
+}
+.feed-card-header h3{
+    margin: 0;
+    font-size: 1.75rem;
+}
+.summary-stats-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+}
+.summary-stats-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 1rem;
+    border-radius: 4px;
+    transform: scale(0.99);
+    transition: all 250ms ease-in-out;
+}
+.summary-stats-row:hover{
+    transform: scale(1);
+    color: var(--highlight-s);
+    cursor: default;
+}
