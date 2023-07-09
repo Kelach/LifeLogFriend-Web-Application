@@ -53,7 +53,7 @@ export default function NutritionOverview({ user }) {
                 {nutritionEntries.map((entry, index) => {
                     const nutritionCardObj = getCardObjFromEntry(entry);
                     return (
-                        <ResourceCard key={entry.id} {...nutritionCardObj} />
+                        <ResourceCard linkTo={`id/${entry.id}`} key={entry.id} {...nutritionCardObj} />
                     )
                 })}
                 {/* <ResourceCard name="Burger"

@@ -1,6 +1,6 @@
 import "./ResourceCard.css";
 import { Link } from "react-router-dom"
-export default function ResourceCard({ imageUrl, name, createdAt, cardDetails }) {
+export default function ResourceCard({ linkTo, imageUrl, name, createdAt, cardDetails }) {
     const getTimeFromTimestamp = (timestamp) => {
         const dateString = new Date(createdAt).toLocaleString().split(",")
         const isToday = dateString[0] === (new Date()).toLocaleString().split(",")[0]
@@ -9,13 +9,8 @@ export default function ResourceCard({ imageUrl, name, createdAt, cardDetails })
     }
     return (
         <div className="resource-card">
-            <Link >
+            <Link to={linkTo} >
                 <div className="resource-card-content box-shadow">
-                    {/* {category && (<div className="resource-card-category">
-                        <h3>
-                            {category}
-                        </h3>
-                    </div>)} */}
                     <div className="resource-card-details">
                         <div className="resource-card-details-header">
                             <h3>

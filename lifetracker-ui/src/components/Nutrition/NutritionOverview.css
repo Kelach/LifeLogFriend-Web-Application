@@ -8,6 +8,9 @@
 .add-nutrition-btn{
     margin: 3rem 0rem;
 }
+.add-nutrition-btn a{
+    display: flex;
+}
 .nutrition-history{
     display: flex;
     flex-direction: column;
