@@ -14,6 +14,7 @@
     color: var(--text-color-dark);
     margin: 1.2rem;
     width: 100%;
+    background-color: var(--bgc-p);
 }
 
 .resource-card-category {
@@ -55,6 +56,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     padding: 1rem;
+    
 }
 .resource-card-details-summary p{
     margin: 0;

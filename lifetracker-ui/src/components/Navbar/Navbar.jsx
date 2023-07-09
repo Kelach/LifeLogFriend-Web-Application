@@ -23,6 +23,7 @@ function NavLinks() {
     { linkText: "Nutrition", linkRoute: "/nutrition" },
     { linkText: "Exercise", linkRoute: "/exercise" },
     { linkText: "Sleep", linkRoute: "/sleep" },
+    { linkText: "Users", linkRoute: "/users" },
   ];
 
   return (

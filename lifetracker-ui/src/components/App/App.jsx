@@ -7,6 +7,7 @@ import LandingPage from "../../pages/LandingPage/LandingPage";
 import SleepPage from "../../pages/SleepPage/SleepPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignUpPage from "../../pages/SignUpPage/SignUpPage";
+import UsersPage from "../../pages/UsersPage/UsersPage";
 import Navbar from "../Navbar/Navbar";
 import NutritionOverview from "../Nutrition/NutritionOverview";
 import NutritionForm from "../Nutrition/NutritionForm";
@@ -93,10 +94,11 @@ function App() {
             <Route path="/nutrition" element={<NutritionPage  {...appState} />}>
               <Route path="/nutrition/" element={<NutritionOverview {...appState} />} s />
               <Route path="/nutrition/create" element={<NutritionForm user={appState.user} setAppState={setAppState} />} />
-              <Route path="/nutrition/id/:nutritionID" element={<ResourceDetailsPage resourceType="nutrition" isAuthenticated={appState.isAuthenticated} />} />
+              <Route path="/nutrition/id/:nutritionId" element={<ResourceDetailsPage resourceType="nutrition" isAuthenticated={appState.isAuthenticated} />} />
             </Route>
             <Route path="/exercise" element={<ExercisePage {...appState} />} />
             <Route path="/sleep" element={<SleepPage />} />
+            <Route path="/users" element={<UsersPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
