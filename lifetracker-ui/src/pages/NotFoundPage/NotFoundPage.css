@@ -1,0 +1,14 @@
+.not-found-container{
+    padding: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.not-found-container h1{
+    font-size: 4rem;
+}
+.not-found-container span{
+    font-size: 20rem;
+}

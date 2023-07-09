@@ -14,6 +14,7 @@ import NutritionDetail from "../../pages/ResourceDetailsPage.jsx/ResourceDetails
 import './App.css';
 import ApiClient from "../../../services/apiClient";
 import ResourceDetailsPage from "../../pages/ResourceDetailsPage.jsx/ResourceDetailsPage";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 
 function App() {
   console.log("app reloading")
@@ -92,10 +93,11 @@ function App() {
             <Route path="/nutrition" element={<NutritionPage  {...appState} />}>
               <Route path="/nutrition/" element={<NutritionOverview {...appState} />} s />
               <Route path="/nutrition/create" element={<NutritionForm user={appState.user} setAppState={setAppState} />} />
-              <Route path="/nutrition/id/:nutritionID" element={<ResourceDetailsPage resourceType="nutrition" />} />
+              <Route path="/nutrition/id/:nutritionID" element={<ResourceDetailsPage resourceType="nutrition" isAuthenticated={appState.isAuthenticated} />} />
             </Route>
             <Route path="/exercise" element={<ExercisePage {...appState} />} />
             <Route path="/sleep" element={<SleepPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
