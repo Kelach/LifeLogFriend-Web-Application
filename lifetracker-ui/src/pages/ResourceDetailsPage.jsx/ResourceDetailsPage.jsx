@@ -2,57 +2,60 @@ import { useParams, Link } from "react-router-dom"
 import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 import { useEffect, useState } from "react";
 import ApiClient from "../../../services/apiClient";
+import { getTimeFromTimestamp } from "../../utils/timeUtils.js"
 import "./ResourceDetailsPage.css";
 export default function ResourceDetailsPage({ resourceType, isAuthenticated }) {
     const params = useParams();
-    const [resourceEntry, setResourceEntry] = useState({});
+    const [hasPermission, setHasPermission] = useState(true)
+    const [resourceEntry, setResourceEntry] = useState({
+        name: "",
+        createdAt: "0",
+        entryProperties: {}
+    });
 
-    // useEffect(() => {
-    //     const fetchResourceById = async () => {
-    //         // fetch data
-    //         const {data, success, statusCode, error }  = 
-    //             await ApiClient.fetchEntryById(resourceType, params[`${resourceType}Id`]);
-    //         if (success){
-    //             const {name, createdAt, id, userId, ...props} = data
-    //             // update entry with name, timestamp
-    //             // and remaining properties (e.g. category, quantity)
-    //             setResourceEntry({
-    //                 name: name,
-    //                 createdAt: createdAt,
-    //                 entryProperties: props
-    //             })
-    //         } else{
-    //             console.log("unable to set resource, ", resourceType,"by id. error ", error)
-    //         }
-    //     }
-    //     fetchResourceById();
-    // }, [])
+    useEffect(() => {
+        const fetchResourceById = async () => {
+            // fetch data
+            const {data, success, statusCode, error }  = 
+                await ApiClient.fetchEntryById(resourceType, params[`${resourceType}Id`]);
+                console.log("retrieved data: ", data)
+            if (success){
+                const {name, createdAt, id, userId, ...props} = data[resourceType] // destructuring id,userId to prevent it from being displayed
+                // update entry with name, timestamp
+                // and remaining properties (e.g. category, quantity)
+                setResourceEntry({
+                    name: name,
+                    createdAt: createdAt,
+                    entryProperties: props
+                });
+            } else{
+                if (statusCode == 1){
+
+                }else{
+                    console.log("unable to set resource, ", resourceType," by id. error ", error)
+                }
+            }
+        }
+        fetchResourceById();
+    }, [])
+
     return (
         <div className="resource-entry-container">
             <div className="resource-entry-content box-shadow">
 
                 <div className="entry-header-container">
-                    <h1>Name here</h1>
-                    <p>timestamp here</p>
+                    <h1>{resourceEntry.name}</h1>
+                    <p>Created: {getTimeFromTimestamp(resourceEntry.createdAt)}</p>
                 </div>
                 <div className="entry-details-container">
-                    <div className="entry-details-row">
-                        <p>Key</p>
-                        <p>Value</p>
+                    {Object.keys(resourceEntry.entryProperties).map((entryProp, index) => {
+                        return (
+                    <div key={entryProp} className="entry-details-row light-text-hover">
+                        <p>{entryProp}:</p>
+                        <p>{resourceEntry.entryProperties[entryProp]}</p>
                     </div>
-
-                    {/* USE MAPPING INSTEAD */}
-                    <div className="entry-details-row">
-                        <p>Key</p>
-                        <p>Value</p>
-                    </div>
-                    <div className="entry-details-row">
-                        <p>Key</p>
-                        <p>Value</p>
-                    </div>
-                    {/* {Object.keys(resourceEntry.entryProperties).map((entry, index) => {
-                    
-                })} */}
+                        ) 
+                    })}
                 </div>
             </div>
             <Link to={`/${resourceType}`}>
@@ -66,8 +69,4 @@ export default function ResourceDetailsPage({ resourceType, isAuthenticated }) {
      * - display product
      * - 
      */
-    return (
-        <>
-        </>
-    )
 }

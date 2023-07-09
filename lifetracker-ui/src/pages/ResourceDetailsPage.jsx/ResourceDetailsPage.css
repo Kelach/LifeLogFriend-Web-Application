@@ -35,10 +35,15 @@
 .entry-details-row{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    padding: 0rem 5rem;
+    justify-content: space-between;
 }
 .entry-details-row p{
     font-size: 2rem;
+}
+.entry-details-row p:nth-child(1){
+    color: var(--p-color);
+    text-transform: capitalize;
 }
 .go-back-btn{
     margin: 2rem;
