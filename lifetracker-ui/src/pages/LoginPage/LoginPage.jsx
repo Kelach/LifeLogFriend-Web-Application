@@ -28,7 +28,7 @@ export default function LoginPage({ appState, setAppState }){
         const { success, data, statusCode } = await ApiClient.login(formData);// returns {token : ....}
 
         if (success) {
-            localStorage.setItem("lifetracker_token", data.user.token);
+            localStorage.setItem("lifetracker_token", data.token);
             console.log("saving token: ", data.token)
             setAppState((initialState) => ({
                 ...initialState,

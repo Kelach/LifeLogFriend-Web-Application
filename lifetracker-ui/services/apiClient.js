@@ -7,9 +7,7 @@ class ApiClient {
         this.token = null;
     }
     setToken(token) {
-        if (token){
-            this.token = token
-        }
+        this.token = token
     }
     getToken(){
         return this.token
@@ -75,7 +73,7 @@ class ApiClient {
         console.log(result)
         return result;
     }
-    async getEntryById(resourceType, entryID) {
+    async fetchEntryById(resourceType, entryID) {
         // handles id specific entry retrievals
         const requestOptions = {
             method: "get",
@@ -83,7 +81,7 @@ class ApiClient {
         }
         return await this.request(requestOptions)
     }
-    async getEntries(resourceType, userId) {
+    async fetchEntries(resourceType, userId) {
         // handles batch entry retrievals
         const requestOptions = {
             method: "get",

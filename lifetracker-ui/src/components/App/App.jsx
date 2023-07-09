@@ -23,65 +23,75 @@ function App() {
     sleep: [],
     exercise: []
   });
-  
+
   useEffect(() => {
     const fetchUser = async () => {
+      // fetches user data from backend
       const userToken = localStorage.getItem("lifetracker_token");
-      console.log(userToken)
+      console.log(userToken);
       ApiClient.setToken(userToken);
       console.log("token: ", ApiClient.getToken());
-      const userResponse = await ApiClient.fetchUserFromToken();
-      const nutritionDataReponse = await ApiClient.getEntries("nutrition", userResponse?.data?.user.email)
-      const excerciseDataReponse = await ApiClient.getEntries("exercise", userResponse?.data?.user.email)
-      const sleepDataReponse = await ApiClient.getEntries("sleep", userResponse?.data?.user.email)
-      console.log(userResponse?.data?.user);
-      
-      if (userResponse.data?.user && appState.isAuthenticated === false){
-        setAppState((initialState) => ({
-          ...initialState,
-            user: userResponse.data?.user,
-            nutrition: nutritionDataReponse.data?.nutritions,
-            exercise: excerciseDataReponse.data?.exercises,
-            sleep: sleepDataReponse.data?.sleeps,
-            isAuthenticated: true
-        }))
-      }else{
-        setAppState((initialState) => ({
+
+      const { data, success, statusCode } = await ApiClient.fetchUserFromToken();
+      console.log(data?.user);
+
+      if (success) {
+        // updates appstate if request to backend 
+        // was successful
+        if (data.user && appState.isAuthenticated === false) {
+          // if user exists, set isAuth to true if its currently false
+          setAppState((initialState) => ({
             ...initialState,
-            user: userResponse.data?.user,
-            nutrition: nutritionDataReponse.data?.nutritions,
-            exercise: excerciseDataReponse.data?.exercises,
-            sleep: sleepDataReponse.data?.sleeps
+            user: data.user,
+            isAuthenticated: true
+          }))
+        } else {
+          // if user exists and auth is true, just set user
+          setAppState((initialState) => ({
+            ...initialState,
+            user: data.user,
           }));
         }
+      } else {
+        // set isAuth to false if no token exists in 
+        // local storage
+        if (statusCode == 401){
+          console.log("error fetching user data: ", statusCode)
+          setAppState((initialState) => ({
+            ...initialState,
+            isAuthenticated: false
+          }))
+        }
       }
-      fetchUser();
-    }, [appState.isAuthenticated])
-    
-    const NavBarOverlay = () => {
-      return (
-        <>
-          <Navbar appState={appState} setAppState={setAppState} />
-          <Outlet />
-        </>
-      )
     }
-    
+
+    fetchUser(); // function calling
+  }, [appState.isAuthenticated])
+
+  const NavBarOverlay = () => {
     return (
-      <div className="app-container">
+      <>
+        <Navbar appState={appState} setAppState={setAppState} />
+        <Outlet />
+      </>
+    )
+  }
+
+  return (
+    <div className="app-container">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<NavBarOverlay />}>
             <Route path="/" element={<LandingPage />} />
             <Route path="/signup" element={<SignUpPage appState={appState} setAppState={setAppState} />} />
             <Route path="/login" element={<LoginPage appState={appState} setAppState={setAppState} />} />
-            <Route path="/activity" element={<ActivityPage {...appState}/>} />
+            <Route path="/activity" element={<ActivityPage {...appState} />} />
             <Route path="/nutrition" element={<NutritionPage  {...appState} />}>
-              <Route path="/nutrition/" element={<NutritionOverview {...appState}/>}s />
-              <Route path="/nutrition/create" element={<NutritionForm user={appState.user} setAppState={setAppState} />}/>
-              <Route path="/nutrition/id/:nutritionID" element={<NutritionDetail />}/>
+              <Route path="/nutrition/" element={<NutritionOverview {...appState} />} s />
+              <Route path="/nutrition/create" element={<NutritionForm user={appState.user} setAppState={setAppState} />} />
+              <Route path="/nutrition/id/:nutritionID" element={<NutritionDetail />} />
             </Route>
-            <Route path="/exercise" element={<ExercisePage {...appState}/>} />
+            <Route path="/exercise" element={<ExercisePage {...appState} />} />
             <Route path="/sleep" element={<SleepPage />} />
           </Route>
         </Routes>

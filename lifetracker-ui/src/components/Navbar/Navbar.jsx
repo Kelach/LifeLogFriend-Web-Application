@@ -34,20 +34,22 @@ function NavLinks() {
 export default function Navbar( {appState, setAppState } ) {
   const navigate = useNavigate();
   const logoutUser = (event) => {
-    localStorage.setItem("lifetracker_token", "")
+    event.preventDefault();
+    localStorage.setItem("lifetracker_token", "");
     ApiClient.setToken("");
-    setAppState((initialState) => ({
-      ...initialState,
-      isAuthenticated: false
-    }));
-    navigate("/");
+    console.log("navbar token: ", ApiClient.getToken())
+    // setAppState((initialState) => ({
+    //   ...initialState,
+    //   isAuthenticated: false
+    // }));
+    // navigate("/");
   }
   return (
     <nav className="navbar" name="navigation-bar" >
 
       <div className="navbar-content">
         <div className="logo">
-          <Link to={"/"}>
+          <Link to={appState.isAuthenticated ? "/activity" : "/"}>
             <img src={Logo} alt="Life Log Friend Logo" />
           </Link>
         </div>
@@ -61,7 +63,7 @@ export default function Navbar( {appState, setAppState } ) {
             : (
               <>
                 <Link to={"/login"}>
-                  <button onClick={logoutUser} className="btn-outline-medium auth-btn">Login</button>
+                  <button className="btn-outline-medium auth-btn">Login</button>
                 </Link>
                 <Link to="/signup">
                   <button className="btn-outline-medium auth-btn">SignUp</button>

@@ -8,7 +8,7 @@ export default function NutritionOverview({ user }) {
     const [nutritionEntries, setNutritionEntries] = useState([]);
     useEffect(() => {
         const getNutritionEntries = async () => {
-            const {success, data, statusCode} = await ApiClient.getEntries("nutrition", user?.email);
+            const {success, data, statusCode} = await ApiClient.fetchEntries("nutrition", user?.email);
             if (success){
                 setNutritionEntries(() => [...data.nutritions])
             } else{
