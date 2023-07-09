@@ -46,15 +46,22 @@ a{
     transform: scale(0.99);
     transition: all 180ms ease-in-out;
 }
-.btn-outline-medium{
-    max-width: 15rem;
-    font-size: 1.25rem;
-    padding: 0.45rem;
-}
+
 .btn-outline-large:hover, .btn-outline-medium:hover, .btn-outline-small:hover{
     --main-color: var(--highlight-s);
     cursor: pointer;
     transform: scale(1);
+}
+
+.btn-outline-small{
+    max-width: 4rem;
+    font-size: 1rem;
+    padding: 0.45rem;
+}
+.btn-outline-medium{
+    max-width: 15rem;
+    font-size: 1.25rem;
+    padding: 0.45rem;
 }
 .btn-outline-large{
     max-width: 15rem;

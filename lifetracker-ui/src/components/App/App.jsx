@@ -98,7 +98,7 @@ function App() {
             </Route>
             <Route path="/exercise" element={<ExercisePage {...appState} />} />
             <Route path="/sleep" element={<SleepPage />} />
-            <Route path="/users" element={<UsersPage />} />
+            <Route path="/users" element={<UsersPage {...appState} />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
