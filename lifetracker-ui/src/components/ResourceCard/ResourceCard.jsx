@@ -1,12 +1,8 @@
 import "./ResourceCard.css";
 import { Link } from "react-router-dom"
+import { getTimeFromTimestamp } from "../../utils/timeUtils.js"
 export default function ResourceCard({ linkTo, imageUrl, name, createdAt, cardDetails }) {
-    const getTimeFromTimestamp = (timestamp) => {
-        const dateString = new Date(createdAt).toLocaleString().split(",")
-        const isToday = dateString[0] === (new Date()).toLocaleString().split(",")[0]
-        const time = isToday ? dateString[1]: dateString[0]
-        return time
-    }
+    
     return (
         <div className="resource-card">
             <Link to={linkTo} >

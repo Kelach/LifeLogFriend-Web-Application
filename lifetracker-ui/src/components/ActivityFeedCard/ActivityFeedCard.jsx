@@ -19,7 +19,7 @@ export default function ActivityFeedCard() {
                     <p>XX entries/entry</p>
                 </div>
                 <div className="summary-stats-container">
-                    <div className="summary-stats-row">
+                    <div className="summary-stats-row light-text-hover">
                         <p>Weekly Total:</p>
                         <p>value</p>
                     </div>
