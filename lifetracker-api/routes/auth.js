@@ -3,7 +3,7 @@ const express = require("express");
 const { UnauthorizedError, BadRequestError, UnexpectedError, InvalidTokenError } = require("../utils/errors");
 const User = require("../models/user");
 const { createUserJwt } = require("../utils/tokens");
-const { getUserFromToken } = require("../middleware/security");
+const { getUserFromToken, requireAuthenticatedUser } = require("../middleware/security");
 const authRouter = express.Router(); // authentication router
 
 authRouter.post("/login", async (request, response, next) => {
@@ -52,22 +52,37 @@ authRouter.post("/register", async (request, response, next) => {
     }
 });
 
-authRouter.post("/me", async (request, response, next) => {
+authRouter.post("/me", requireAuthenticatedUser, async (request, response, next) => {
     // request header should contain auth token
     try {
-        const user = await getUserFromToken(request);
-        console.log("user: ", user)
+        const { user } = response.locals;
+        console.log("retrieved: ", user)
         if (user) {
             response.status(200).json({ user: user });
-            return
+        } else{
+            console.log("no user found from repsonse locals: ", response.locals)
+            next();
         }
     } catch (error) {
-        if (error instanceof UnauthorizedError) {
-            console.log("throwing un auth erorry")
-            next(error)
-        } else {
-            // console.log("unexpected error occured: ", error)
+        console.log("unexpected error occured: ", error)
+        next(error)
+    }
+});
+authRouter.get("/all",requireAuthenticatedUser, async (request, response, next) => {
+    // request header should contain auth token
+    try {
+        const { user } = response.locals;
+        console.log("getting all user per request from user: ", user);
+        if (user) {
+            const allUsers = await User.fetchAllUsers();
+            response.status(200).json({ users : allUsers });
+        } else{
+            console.log("no user found from repsonse locals: ", response.locals)
+            throw new BadRequestError("no user found from repsonse locals: ");
         }
+    } catch (error) {
+        console.log("unexpected error occured: ", error)
+        next(error)
     }
 });
 // handle login and regisration with the User model

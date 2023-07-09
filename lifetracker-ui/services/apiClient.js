@@ -14,7 +14,7 @@ class ApiClient {
     }
     async request({ method, bodyData, subDirectory }) {
         console.log(API_BASE_URL)
-        const response = await axios({
+         return axios({
             headers: { bearer: this.token || ""},
             method: method,
             data: bodyData,
@@ -35,8 +35,6 @@ class ApiClient {
                 error: axiosError,
             }
         });
-        console.log(response)
-        return response;
     }
     async login(credentials) {
         const requestOptions = {
@@ -44,7 +42,7 @@ class ApiClient {
             bodyData: credentials,
             subDirectory: "/auth/login"
         }
-        return await this.request(requestOptions);
+        return this.request(requestOptions);
     }
     async signup(userForm) {
         // make request to signup user 
@@ -53,7 +51,7 @@ class ApiClient {
             bodyData: userForm,
             subDirectory: "/auth/register"
         }
-        return await this.request(requestOptions)
+        return this.request(requestOptions)
     }
     async fetchUserFromToken() {
         // handles user fetch from token
@@ -61,7 +59,15 @@ class ApiClient {
             method: "post",
             subDirectory: "/auth/me"
         }
-        return await this.request(requestOptions);
+        return this.request(requestOptions);
+    }
+    async fetchAllUsers(){
+        // note, this function returns promise
+        const requestOptions = {
+            method: "get",
+            subDirectory: "/auth/all"
+        }
+        return this.request(requestOptions)
     }
     async postEntry(entryType, entryData) {
         // handles posting new entries to nutrition, sleep, and exercise
@@ -70,9 +76,16 @@ class ApiClient {
             bodyData: entryData,
             subDirectory: `/${entryType}`
         }
-        const result = await this.request(requestOptions);
-        console.log(result)
-        return result;
+        return this.request(requestOptions);
+    }
+    async deleteEntry(entryType, entryData) {
+        // handles posting new entries to nutrition, sleep, and exercise
+        const requestOptions = {
+            method: "post",
+            bodyData: entryData,
+            subDirectory: `/${entryType}`
+        }
+        return this.request(requestOptions);
     }
     async fetchEntryById(resourceType, entryID) {
         // handles id specific entry retrievals
@@ -80,7 +93,7 @@ class ApiClient {
             method: "get",
             subDirectory: `/${resourceType}/${entryID}`
         }
-        return await this.request(requestOptions)
+        return this.request(requestOptions)
     }
     async fetchEntries(resourceType) {
         // handles batch entry retrievals
@@ -88,7 +101,7 @@ class ApiClient {
             method: "get",
             subDirectory: `/${resourceType}`
         }
-        return await this.request(requestOptions)
+        return this.request(requestOptions)
     }
     async fetchResourceStats(resourceType, statId){
         console.log("fetching stats for: ", resourceType)
@@ -98,7 +111,7 @@ class ApiClient {
             subDirectory: `/${resourceType}/stats`
             
         }
-        return await this.request(requestOptions);
+        return this.request(requestOptions);
     }
 }
 

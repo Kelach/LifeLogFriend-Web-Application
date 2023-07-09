@@ -151,16 +151,23 @@ class User {
               password,
               first_name AS "firstName",
               last_name AS "lastName",
-              location,
-              date              
+              created_at,
            FROM users
            WHERE id = $1`,
       [userId]
     )
-
-    const user = result.rows[0]
-
-    return user
+    return result.rows[0]
   }
+  static async fetchAllUsers(){
+
+    const result = await db.query(`SELECT email,
+            first_name AS "firstName",
+            last_name AS "lastName",
+            created_at AS "createdAt"
+            FROM users`)
+    
+    return result.rows;
+  }
+
 }
 module.exports = User
