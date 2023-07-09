@@ -95,6 +95,7 @@ class ApiClient {
             method: "post",
             bodyData: {statId : statId},
             subDirectory: `/${resourceType}/stats`
+            
         }
         return await this.request(requestOptions);
     }
