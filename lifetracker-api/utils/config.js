@@ -5,7 +5,7 @@ require("colors") // used for color coded console logs
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3001 // default to port 3001 if none is set in the .env file
 const IS_TESTING = process.env.NODE_ENV === "test"
-const SECRET_KEY  = process.env.SECRET_KEY;
+const SECRET_KEY  = process.env.SECRET_KEY
 // Use dev database, testing database, or via env var, production database
 // 
 function getDatabaseUri() {

@@ -31,7 +31,8 @@ class ApiClient {
             // update response variable with error if unsuccessful
             return {
                 success: false,
-                statusCode: axiosError.response?.status
+                statusCode: axiosError.response?.status,
+                error: axiosError,
             }
         });
         console.log(response)

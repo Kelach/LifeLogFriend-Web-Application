@@ -107,8 +107,10 @@ class User {
     )
 
     const userData = result.rows[0]
+    console.log("UserData", userData)
     const userToken = createUserJwt({userID:  userData.id, userEmail : userData.email});
-    return {...userData, token: userToken}
+    console.log("recieved token: ", userToken);
+    return {...userData, token: userToken};
   }
 
   /**

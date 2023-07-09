@@ -47,6 +47,7 @@ authRouter.post("/register", async (request, response, next) => {
         }
         throw new BadRequestError("No body data recieved");
     } catch(error) {
+        console.log("error trying to register user: ", error)
         return next(error);
     }
 });
