@@ -92,12 +92,15 @@ class LifeTrackerResourceModel {
         try{
             const sum = await db.query(
                 `SELECT SUM(`+ `${statId}`  +`)
-                FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1`
+                FROM ` + resourceType.toLowerCase() + ` 
+                WHERE user_id=$1 
+                AND created_at >= date_trunc('week', current_date)
+                AND created_at < date_trunc('week', current_date) + INTERVAL '1 week'`
                 , [userId]
             )
 
             const average = await db.query(
-                `SELECT AVG(`+ `${statId}`  +`)
+                `SELECT round(AVG(`+ `${statId}`  +`), 2) as "avg"
                 FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1`
                 , [userId]
             )

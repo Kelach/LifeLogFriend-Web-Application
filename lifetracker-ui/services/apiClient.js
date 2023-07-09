@@ -91,6 +91,7 @@ class ApiClient {
         return await this.request(requestOptions)
     }
     async fetchResourceStats(resourceType, statId){
+        console.log("fetching stats for: ", resourceType)
         const requestOptions = {
             method: "post",
             bodyData: {statId : statId},

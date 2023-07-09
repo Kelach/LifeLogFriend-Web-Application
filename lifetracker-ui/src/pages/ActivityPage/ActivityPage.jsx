@@ -5,35 +5,47 @@ import ForbiddenPage from "../ForbiddenPage/ForbiddenPage";
 import "./ActivityPage.css";
 export default function ActivityPage({ user, isAuthenticated }) {
 
-    const [resourceStats, setResourceStats] = useState({
-        nutritionStat: null,
-        exerciseStat: null,
-        sleepStat: null
-    });
+    const [resourceStats, setResourceStats] = useState({});
+    console.log(resourceStats)
+    // main page after login.
+    useEffect(() => {
+        // get all tracker stats
+        const getAllStats = async () => {
 
-    // // main page after login.
-    // useEffect(() => {
-    //     // get all tracker stats
-    //     const nutritionResponse = await ApiClient.fetchResourceStats("nutrition")
-    //     const exerciseResponse = await ApiClient.fetchResourceStats"exercise")
-    //     const sleepResponse = await ApiClient.fetchResourceStats("sleep")
-
-    //     setResourceStats((initialData) => ({
-    //         ...initialData,
-    //         nutritionStat: {
-    //             text: "Total calories eaten",
-    //             value: nutritionResponse.data.stat
-    //         },
-    //         exerciseStat: {
-    //             text: "Total minutes of exercise",
-    //             value: exerciseResponse.data.stat
-    //         },
-    //         sleepStat: {
-    //             text: "Average hours of sleep",
-    //             value: sleepResponse.data.stat
-    //         })
-    //         )
-    // }, []);
+            const nutritionResponse = await ApiClient.fetchResourceStats("nutrition", "calories")
+            console.log("nutrition stats: ", nutritionResponse)
+            // const exerciseResponse = await ApiClient.fetchResourceStats("exercise", "calories")
+            // const sleepResponse = await ApiClient.fetchResourceStats("sleep", "duration")
+            if (nutritionResponse.success){
+                setResourceStats((initialData) => ({
+                    ...initialData,
+                    nutritionStats: {
+                        resourceType: "nutrition",
+                        statUnits: "calories",
+                        stats: nutritionResponse.data.stats
+                    }}))
+            }
+            // if (exerciseResponse.success){
+            //     setResourceStats((initialData) => ({
+            //         ...initialData,
+            //         exerciseStats: {
+            //             resourceType: "exercise",
+            //             statUnits: "calories burned",
+            //             stats: exerciseResponse.data.stats
+            //         }}))
+            // }
+            // if (sleepResponse.success){
+            //     setResourceStats((initialData) => ({
+            //         ...initialData,
+            //         sleepStats: {
+            //             resourceType: "sleep",
+            //             statUnits: "hours",
+            //             stats: sleepResponse.data.stats
+            //         }}))
+            // }
+        }
+        getAllStats();
+    }, []);
     return (
         isAuthenticated ?
             (
@@ -47,11 +59,20 @@ export default function ActivityPage({ user, isAuthenticated }) {
                     </div>
                     <div className="activity-dashboard-container">
                         <div className="activity-summary-cards">
-                        <ActivityFeedCard />
-                        <ActivityFeedCard />
-                        <ActivityFeedCard />
+                        {Object.keys(resourceStats).map((statObjKey, index) => {
+                            const statObj = resourceStats[statObjKey]
+
+                            return (
+                                <ActivityFeedCard key={statObj.resourceType} 
+                                statUnits={statObj.statUnits}
+                                stats={statObj.stats} 
+                                resourceType={statObj.resourceType}/>
+                            )
+                        })}
+                        {/* <ActivityFeedCard /> */}
+                        {/* <ActivityFeedCard /> */}
                         </div>
-                            {/* <ActivityFeedCard title={"Nutrition"} stat={nutritionStat} /> */}
+                            {/* <ActivityFeedCard title={"Nutrition"} stat={s} /> */}
                         {/* <ActivityFeedCard title={"Exercise"} stat={exerciseStat} />
             <ActivityFeedCard title={"Sleep"} stat={sleepStat} /> */}
                     </div>

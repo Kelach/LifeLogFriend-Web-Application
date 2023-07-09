@@ -18,6 +18,7 @@
     padding: 0rem 1rem;
 }
 .feed-card-header h3{
+    text-transform: capitalize;
     margin: 0;
     font-size: 1.75rem;
 }
