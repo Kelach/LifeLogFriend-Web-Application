@@ -62,6 +62,5 @@ async function requireAuthenticatedUser(request, response, next){
 module.exports = {
     getUserFromToken,
     requireAuthenticatedUser,
-    requireAuthorizedUser,
     getJWT
 };

@@ -9,7 +9,6 @@ const nutritionRouter = require("./routes/nutrition");
 const { IS_TESTING } = require("./utils/config");
 const { NotFoundError } = require("./utils/errors");
 const { requireAuthenticatedUser } = require("./middleware/security");
-const { requireAuthorizedUser } = require("./middleware/security");
 
 //USING MIDDLEWARE
 const app = express();
