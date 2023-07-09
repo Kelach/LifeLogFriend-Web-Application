@@ -139,7 +139,7 @@ class User {
   }
 
   /**
-   * Fetch a user in the database by id ???
+   * Fetch a user in the database by id
    *
    * @param {String} userId
    * @returns user

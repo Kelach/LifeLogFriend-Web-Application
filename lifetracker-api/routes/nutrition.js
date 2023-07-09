@@ -1,7 +1,6 @@
 const express = require("express");
 const nutritionRouter = express.Router();
 const Nutrition = require("../models/nutrition");
-const { getUserFromToken } = require("../middleware/security");
 
 nutritionRouter.post("/", async (request, response, next) => {
     console.log("received nutriton post request", request.body);
@@ -17,15 +16,28 @@ nutritionRouter.post("/", async (request, response, next) => {
 nutritionRouter.get("/", async (request, response, next) => {
     console.log("received nutriton get request");
     try {
-        const { email } = await getUserFromToken(request);
-        const entries = await Nutrition.listNutritionForUser(email);
-        response.status(201).json({ "nutritions": entries });
+        const { email } = response.locals.user;
+        const nutritions = await Nutrition.listNutritionForUser(email);
+        response.status(201).json({ "nutritions": nutritions });
     } catch (error) {
         console.log("error in nutrition route", error)
         next(error);
     }
 
 })
+nutritionRouter.post("/stats", async (request, response, next) => {
+    console.log("received nutriton stats request");
+    try {
+        console.log(request.body);
+        const { statId } = request.body;
+        const { email } = response.locals.user;
+        console.log(statId, email)
+        const stats = await Nutrition.fetchNutritionStats(email, statId);
+        response.status(201).json({ "stats": stats });
+    } catch (error) {
+        next(error);
+    }
+});
 nutritionRouter.get("/:nutritionId", async (request, response, next) => {
     console.log("received nutriton getById request", request.params.nutritionId);
     try {
@@ -34,6 +46,6 @@ nutritionRouter.get("/:nutritionId", async (request, response, next) => {
     } catch (error) {
         next(error);
     }
-})
+});
 
 module.exports = nutritionRouter;

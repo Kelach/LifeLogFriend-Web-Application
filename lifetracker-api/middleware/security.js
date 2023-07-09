@@ -33,29 +33,35 @@ async function getUserFromToken(request){
 }
 async function requireAuthenticatedUser(request, response, next){
     console.log("verfiying user");
+
     // if token exists, check user exists 
     try {
         const user = await getUserFromToken(request)
+        console.log("retrieved user: ", user)
         if (!user){
             console.log("access forbidden page");
             return next(new UnauthorizedError);
         }
-        console.log("valid users. access granted");
+
+        response.locals.user = user;
+        console.log("valid users. access granted", user);
         return next();
+
     } catch (error){
         // otherwise throw error
         if (error instanceof UnauthorizedError){
             console.log("Unauthorizaed user");
             return next(error);
         } else{
+            console.log("Unexpected error occured trying to verify user");
             return next(error);
         }
     }
-    // console.log("invalid user");
-    // return next(new BadRequestError("Non-existent token"));
 }
+
 module.exports = {
     getUserFromToken,
     requireAuthenticatedUser,
+    requireAuthorizedUser,
     getJWT
 };

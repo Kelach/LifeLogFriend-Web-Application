@@ -14,9 +14,9 @@ export default function ActivityPage({ user, isAuthenticated }) {
     // // main page after login.
     // useEffect(() => {
     //     // get all tracker stats
-    //     const nutritionResponse = await ApiClient.getSats("nutrition", "calories")
-    //     const exerciseResponse = await ApiClient.getStats"exercise", "duration")
-    //     const sleepResponse = await ApiClient.getStats("sleep", "duration")
+    //     const nutritionResponse = await ApiClient.fetchResourceStats("nutrition")
+    //     const exerciseResponse = await ApiClient.fetchResourceStats"exercise")
+    //     const sleepResponse = await ApiClient.fetchResourceStats("sleep")
 
     //     setResourceStats((initialData) => ({
     //         ...initialData,

@@ -29,6 +29,15 @@ class Nutrition /* extends LifeTrackerResourceModel */ {
             throw error;
         }
     }
+    static async fetchNutritionStats(userId, statId){
+        try {
+            const nutritionStats = await LifeTrackerResourceModel.fetchResourceStats("nutrition",  userId, statId)
+            return nutritionStats;
+        } catch (error) {
+            console.log("error getting stats: ", error)
+            throw error;
+        }
+    }
 }
 
 module.exports = Nutrition;

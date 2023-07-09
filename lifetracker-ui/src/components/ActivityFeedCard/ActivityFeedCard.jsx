@@ -1,5 +1,14 @@
 import "./ActivityFeedCard.css";
+import ApiClient from "../../../services/apiClient";
+import { useEffect } from "react";
 export default function ActivityFeedCard() {
+    useEffect(() => {
+        const fetchStats = async () => {
+            const { data, success, statusCode} = await ApiClient.fetchResourceStats("nutrition", "calories");
+            console.log(data)
+        }
+        fetchStats();
+    }, [])
 
     return (
         <>

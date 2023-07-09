@@ -67,7 +67,6 @@ class LifeTrackerResourceModel {
         }
     }
     static async listResourceEntriesForUser(resourceType, userId) {
-        if (!userId) throw new BadRequestError("No userId was given: ", userId);
         try{
             const result = await db.query(
                 `SELECT id, 
@@ -82,6 +81,49 @@ class LifeTrackerResourceModel {
             return result.rows // returns list of nutrition objects
         }catch (error) {
             console.log("unable to fetch entries for resource type:", resourceType)
+            throw error
+        }
+    }
+    static async fetchResourceStats(resourceType, userId, statId){
+        /**
+         * @TODO update WHERE expression to include only entries
+         * within a given time range
+         */
+        try{
+            const sum = await db.query(
+                `SELECT SUM(`+ `${statId}`  +`)
+                FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1`
+                , [userId]
+            )
+
+            const average = await db.query(
+                `SELECT AVG(`+ `${statId}`  +`)
+                FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1`
+                , [userId]
+            )
+            const max = await db.query(
+                `SELECT MAX(`+ `${statId}`  +`)
+                FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1`
+                , [userId]
+            )
+            const min = await db.query(
+                `SELECT MIN(`+ `${statId}`  +`)
+                FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1`
+                , [userId]
+            )
+            const count = await db.query(
+                `SELECT COUNT(`+ `${statId}`  +`)
+                FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1`
+                , [userId]
+            )
+            // console.log(sum)
+            return {...sum.rows[0], 
+                ...average.rows[0], 
+                ...max.rows[0], 
+                ...min.rows[0], 
+                ...count.rows[0]} // returns list of nutrition objects
+        }catch (error) {
+            console.log("unable to fetch stats for resource type:", resourceType)
             throw error
         }
     }

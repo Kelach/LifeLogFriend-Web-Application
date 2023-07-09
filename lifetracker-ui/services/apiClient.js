@@ -82,14 +82,21 @@ class ApiClient {
         }
         return await this.request(requestOptions)
     }
-    async fetchEntries(resourceType, userId) {
+    async fetchEntries(resourceType) {
         // handles batch entry retrievals
         const requestOptions = {
             method: "get",
-            bodyData: {userId: userId},
             subDirectory: `/${resourceType}`
         }
         return await this.request(requestOptions)
+    }
+    async fetchResourceStats(resourceType, statId){
+        const requestOptions = {
+            method: "post",
+            bodyData: {statId : statId},
+            subDirectory: `/${resourceType}/stats`
+        }
+        return await this.request(requestOptions);
     }
 }
 
