@@ -1,0 +1,19 @@
+.sleep-details-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem 10rem 0rem 10rem;
+}
+.add-sleep-btn{
+    margin: 1rem 0rem;
+}
+.add-sleep-btn a{
+    display: flex;
+}
+.sleep-history{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+

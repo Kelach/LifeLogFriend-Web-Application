@@ -1,12 +1,12 @@
 import { useState } from "react";
 import TextInput from "../TextInput/TextInput";
 import CircleLoader from "../CircleLoader/CircleLoader";
-import "./ExerciseForm.css";
+import "./SleepForm.css";
 import ApiClient from "../../../services/apiClient";
-import { fetchMinutes } from "../../utils/timeUtils";
 import { useNavigate } from "react-router-dom";
+import { fetchMinutes } from "../../utils/timeUtils";
 
-export default function ExerciseForm({ setAppState, user }) {
+export default function SleepForm({ setAppState, user }) {
 
     const navigate = useNavigate();
     const [formErrorText, setFormErrorText] = useState("");
@@ -18,7 +18,8 @@ export default function ExerciseForm({ setAppState, user }) {
         start_time: "0:0",
         end_time: "0:0"
     });
-    const onExerciseFormSubmit = async (event) => {
+
+    const onSleepFormSubmit = async (event) => {
         event.preventDefault();
 
         // calculating duration
@@ -28,7 +29,7 @@ export default function ExerciseForm({ setAppState, user }) {
 
         // making request
         const { success, statusCode, data } =
-            await ApiClient.postEntry("exercise",
+            await ApiClient.postEntry("sleep",
                 {
                     ...payload,
                     duration: duration,
@@ -38,8 +39,8 @@ export default function ExerciseForm({ setAppState, user }) {
         
         if (success) {
             // update app state with data
-            console.log("retrieve exercise entry: ", data);
-            navigate("/exercise");
+            console.log("retrieve sleep entry: ", data);
+            navigate("/sleep");
         } else {
             if (statusCode == 422) {
                 const message = "Invalid response. Please review the required field and try again."
@@ -67,13 +68,13 @@ export default function ExerciseForm({ setAppState, user }) {
         console.log(formData);
     }
     return (
-        <div className="exercise-entry-container">
-            <div className="exercise-entry-content">
-                <div className="exercise-entry-header">
-                    <h2>Add Exercise</h2>
+        <div className="sleep-entry-container">
+            <div className="sleep-entry-content">
+                <div className="sleep-entry-header">
+                    <h2>Add Sleep</h2>
                 </div>
-                <form onSubmit={onExerciseFormSubmit} className="exercise-entry-form">
-                    <div className="exercise-form-content box-shadow">
+                <form onSubmit={onSleepFormSubmit} className="sleep-entry-form">
+                    <div className="sleep-form-content box-shadow">
                         <TextInput
                             name={"name"}
                             placeholder={"Name"}
@@ -83,19 +84,11 @@ export default function ExerciseForm({ setAppState, user }) {
                             showLabel={true} />
                         <div className="category-container">
                             <label htmlFor="category">Cateogory:</label>
-                            <select onChange={onValueChange} className="exercise-category-select" name="category">
-                                <option value="Workout">Workout</option>
-                                <option value="Sports">Sports</option>
+                            <select onChange={onValueChange} className="sleep-category-select" name="category">
+                                <option value="Nap">Nap</option>
+                                <option value="Bedtime">Bedtime</option>
                             </select>
                         </div>
-                        <TextInput
-                            value={formData.calories_burned}
-                            onChange={onValueChange}
-                            name="calories_burned"
-                            placeholder="Calories"
-                            type="number"
-                            helperText={{ constraint: "be non-zero", expression: formData.calories_burned == 0 }}
-                            showLabel={true} />
                         <TextInput value={formData.start_time}
                             onChange={onValueChange}
                             name="start_time"
