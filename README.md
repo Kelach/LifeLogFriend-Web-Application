@@ -39,7 +39,7 @@ By the end of this project you will be able to...
 - [ X ] Deploy your website with Render. Check out our [Render Deployment Guide](https://courses.codepath.org/snippets/site/render_deployment_guide) for detailed instructions.
 
 ## LOOM VIDEO
-https://www.loom.com/share/e96a0dd6b4894beba6ae47c692ff03c6?sid=4ae1e57a-35a3-446c-9c17-844ec6f3437c
+https://www.loom.com/share/cb4e2939900242b7bb53ca01d86abb6d?sid=8e2f3fb1-9388-4338-92c8-c1ec96142b39
 
 ## Render Website
 https://life-tracker-ui-21m3.onrender.com/
@@ -48,13 +48,13 @@ https://life-tracker-ui-21m3.onrender.com/
 
 Implement any of the following features to improve the application:
 
-- [  ] Users have access to an overview Activity page that shows one summary statistic about each of the three types of activity tracked (i.e., total number of minutes exercised, average calories consumed, max hours of sleep in one night, etc.). These summary statistics should be created using the `AVG`, `SUM`, `COUNT`, `MIN`, `MAX`, functions in SQL queries and served from a dedicated API endpoint. *Note: Summary statistics should not be calculated on the frontend.*
-- [  ] Each model (i.e `nutrition`, `exercise`, and `sleep`) should also implement a `fetchById` method that queries the database for a record by its id and only serves it to users who own that resource.
+- [ X ] Users have access to an overview Activity page that shows one summary statistic about each of the three types of activity tracked (i.e., total number of minutes exercised, average calories consumed, max hours of sleep in one night, etc.). These summary statistics should be created using the `AVG`, `SUM`, `COUNT`, `MIN`, `MAX`, functions in SQL queries and served from a dedicated API endpoint. *Note: Summary statistics should not be calculated on the frontend.*
+- [ X ] Each model (i.e `nutrition`, `exercise`, and `sleep`) should also implement a `fetchById` method that queries the database for a record by its id and only serves it to users who own that resource.
   - You should also create a new dynamic route on the frontend that displays detail about a single record. For instance, `nutrition/detail/:id` should show a page with all the information about a single nutrition item.
-- [  ] Provide a dropdown that allows users to filter activity based on a certain attribute of any activity item. Example: filter exercise or nutrition by category, or filter sleep by the week/month it was recorded.
-- [  ] Calculate aggregate statistics based on time periods - such as daily, weekly, monthly aggregates.
-- [  ] Create a page that shows all other users that use the LifeTracker application and allow users to follow each other. You'll want to create a new table to store this data.
-- [  ] Implement `security` middleware on the API that allows only authenticated users to access resources and allows users to only access resources about themselves.
+- [ X ] Provide a dropdown that allows users to filter activity based on a certain attribute of any activity item. Example: filter exercise or nutrition by category, or filter sleep by the week/month it was recorded.
+- [ X ] Calculate aggregate statistics based on time periods - such as daily, weekly, monthly aggregates.
+- [ X ] Create a page that shows all other users that use the LifeTracker application and allow users to follow each other. You'll want to create a new table to store this data.
+- [ X ] Implement `security` middleware on the API that allows only authenticated users to access resources and allows users to only access resources about themselves.
 
 ### Building the app
 
