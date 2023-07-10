@@ -2,13 +2,12 @@ import "./ResourcePageHeader.css";
 import FoodImage from  "../../assets/food.jpg";
 import BikePath from  "../../assets/bikepath.jpg";
 import SleepingBed from  "../../assets/bed.jpg";
-// import foodImage from  "../../assets/food.jpg";
-// import foodImage from  "../../assets/food.jpg";
+
 export default function ResourcePageHeader({ title, imageAlt }) {
     const imagesMap = {
         "Nutrition" : FoodImage,
         "Exercise" : BikePath,
-        "SleepingBed" : SleepingBed
+        "Sleep" : SleepingBed
     }
     let ImageSRC = imagesMap[title]
     console.log(ImageSRC)
