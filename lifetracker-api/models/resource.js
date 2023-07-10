@@ -6,10 +6,9 @@ class LifeTrackerResourceModel {
     constructor() {
 
     }
-    static async createNewResourceEntry(resourceType, entryData) {
+    static async createNewResourceEntry(resourceType, entryData, requiredFields, psqlQuery, psqlQueryVariables) {
         // creates new entry from a given resource type (nutrition, exercise, or others)
 
-        const requiredFields = ["name", "category", "calories", "quantity", "userId"]
         try {
             validateFields({ required: requiredFields, obj: entryData, location: `new ${resourceType} entry` })
         } catch (err) {
@@ -17,66 +16,25 @@ class LifeTrackerResourceModel {
         }
         try {
 
-            const result = await db.query(
-                `INSERT INTO ` + resourceType.toLowerCase() +  ` (
-                    user_id,
-                    name,
-                    category,
-                    calories,
-                    quantity,
-                    created_at
-                ) VALUES ($1, $2, $3, $4, $5, to_timestamp($6))
-                RETURNING user_id AS "userId",
-                          name,
-                          category,
-                          calories,
-                          quantity,
-                          id,
-                          created_at AS "createdAt"
-                `, [entryData.userId,
-                entryData.name,
-                entryData.category,
-                entryData.calories,
-                entryData.quantity,
-                Date.now() / 1000,
-            ]
-            )
+            const result = await db.query(psqlQuery, psqlQueryVariables)
             return result.rows[0]
         } catch (error) {
             console.log("unable to uplaod entry to psql: ", error)
             throw error;
         }
     }
-    static async fetchResourceEntryById(resourceType, entryID) {
+    static async fetchResourceEntryById(psqlQuery, psqlQueryVariables) {
         try{
-            const result = await db.query(
-                `SELECT id,
-                user_id AS "userId",
-                name,
-                category,
-                calories,
-                quantity,
-                created_at AS "createdAt" FROM ` + resourceType.toLowerCase() + ` WHERE id = $1`,
-                [entryID.toLowerCase()]
-            )
+            const result = await db.query(psqlQuery, psqlQueryVariables)
             return result.rows[0]
         }catch (error){
             console.log("unable to fetch resource: ", resourceType, "by id: ", entryID)
             throw error;
         }
     }
-    static async listResourceEntriesForUser(resourceType, userId) {
+    static async listResourceEntriesForUser(psqlQuery, psqlQueryVariables) {
         try{
-            const result = await db.query(
-                `SELECT id, 
-                user_id AS "userId",
-                name,
-                category,
-                calories,
-                quantity,
-                created_at AS "createdAt" FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1 `
-                , [userId]
-            )
+            const result = await db.query(psqlQuery, psqlQueryVariables)
             return result.rows // returns list of nutrition objects
         }catch (error) {
             console.log("unable to fetch entries for resource type:", resourceType)
