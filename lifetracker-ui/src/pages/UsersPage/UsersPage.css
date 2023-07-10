@@ -71,11 +71,7 @@
     justify-content: center;
     width: 100%
 }
-/* .user-row span:nth-child(1){
-    margin-left: 1.3rem;
-    justify-content: start;
-} */
-/* .user-row span:nth-child(5){
-    justify-content: end;
-    margin-right: 1.3rem;
-} */
+.follow-btn.following{
+    background-color: var(--s-color);
+
+}
