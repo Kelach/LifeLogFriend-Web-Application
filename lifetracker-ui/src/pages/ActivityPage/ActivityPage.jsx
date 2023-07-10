@@ -14,8 +14,8 @@ export default function ActivityPage({ user, isAuthenticated }) {
 
             const nutritionResponse = await ApiClient.fetchResourceStats("nutrition", "calories")
             console.log("nutrition stats: ", nutritionResponse)
-            // const exerciseResponse = await ApiClient.fetchResourceStats("exercise", "calories")
-            // const sleepResponse = await ApiClient.fetchResourceStats("sleep", "duration")
+            const exerciseResponse = await ApiClient.fetchResourceStats("exercise", "calories_burned")
+            const sleepResponse = await ApiClient.fetchResourceStats("sleep", "duration")
             if (nutritionResponse.success){
                 setResourceStats((initialData) => ({
                     ...initialData,
@@ -25,24 +25,24 @@ export default function ActivityPage({ user, isAuthenticated }) {
                         stats: nutritionResponse.data.stats
                     }}))
             }
-            // if (exerciseResponse.success){
-            //     setResourceStats((initialData) => ({
-            //         ...initialData,
-            //         exerciseStats: {
-            //             resourceType: "exercise",
-            //             statUnits: "calories burned",
-            //             stats: exerciseResponse.data.stats
-            //         }}))
-            // }
-            // if (sleepResponse.success){
-            //     setResourceStats((initialData) => ({
-            //         ...initialData,
-            //         sleepStats: {
-            //             resourceType: "sleep",
-            //             statUnits: "hours",
-            //             stats: sleepResponse.data.stats
-            //         }}))
-            // }
+            if (exerciseResponse.success){
+                setResourceStats((initialData) => ({
+                    ...initialData,
+                    exerciseStats: {
+                        resourceType: "exercise",
+                        statUnits: "calories burned",
+                        stats: exerciseResponse.data.stats
+                    }}))
+            }
+            if (sleepResponse.success){
+                setResourceStats((initialData) => ({
+                    ...initialData,
+                    sleepStats: {
+                        resourceType: "sleep",
+                        statUnits: "hours",
+                        stats: sleepResponse.data.stats
+                    }}))
+            }
         }
         getAllStats();
     }, []);

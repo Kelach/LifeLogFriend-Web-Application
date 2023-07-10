@@ -64,7 +64,7 @@ class LifeTrackerResourceModel {
             )
 
             const average = await db.query(
-                `SELECT round(AVG(`+ `${statId}`  +`), 2) as "avg"
+                `SELECT round(AVG(`+ `${statId}::numeric`  +`), 2) as "avg"
                 FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1`
                 , [userId]
             )
