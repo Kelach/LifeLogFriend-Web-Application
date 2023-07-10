@@ -41,15 +41,7 @@ class Nutrition /* extends LifeTrackerResourceModel */ {
     static async fetchNutritionById(nutritionId) {
         console.log(nutritionId)
         try {
-            const psqlQuery = `SELECT id,
-                                user_id AS "userId",
-                                name,
-                                category,
-                                calories,
-                                quantity,
-                                created_at AS "createdAt" FROM nutrition WHERE id = $1`;
-            const psqlQueryVariables = [nutritionId]
-            const newEntry = await LifeTrackerResourceModel.fetchResourceEntryById(psqlQuery, psqlQueryVariables)
+            const newEntry = await LifeTrackerResourceModel.fetchResourceEntryById("nutrition", nutritionId)
             return newEntry
         } catch (error) {
             throw error;
@@ -58,15 +50,7 @@ class Nutrition /* extends LifeTrackerResourceModel */ {
     }
     static async listNutritionForUser(userId) {
         try {
-            const psqlQuery =  `SELECT id, 
-                                user_id AS "userId",
-                                name,
-                                category,
-                                calories,
-                                quantity,
-                                created_at AS "createdAt" FROM nutrition WHERE user_id=$1 `
-            const psqlQueryVariables = [userId]
-            const nutritionEntries = await LifeTrackerResourceModel.listResourceEntriesForUser(psqlQuery, psqlQueryVariables)
+            const nutritionEntries = await LifeTrackerResourceModel.listResourceEntriesForUser("nutrition", userId)
             return nutritionEntries
         } catch (error) {
             throw error;

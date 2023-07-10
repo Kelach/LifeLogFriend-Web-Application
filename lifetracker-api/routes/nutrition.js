@@ -2,14 +2,6 @@ const express = require("express");
 const nutritionRouter = express.Router();
 const { authedUserOwnsResource } = require("../middleware/permissions");
 
-/**
- * @todo
- * - complete permissions middleware (currently need to console log request so i can find path)
- * - use path to detemrine which resource is being requested
- * - make call to entry by id inside permissions function
- * - return error if entry id is not equal to user id
- * - set nutrition parameter in res.locals if nutrition is found
- */
 const Nutrition = require("../models/nutrition");
 
 nutritionRouter.post("/", async (request, response, next) => {

@@ -33,19 +33,11 @@ class Exercise /* extends LifeTrackerResourceModel */ {
             throw error;
         }
     }
+    
     static async fetchExerciseById(exerciseId) {
         console.log(exerciseId)
         try {
-            const psqlQuery = `SELECT id,
-                                user_id AS "userId",
-                                name,
-                                category,
-                                calories_burned AS "caloriesBurned",
-                                duration,
-                                id,
-                                created_at AS "createdAt" FROM exercise WHERE id = $1`;
-            const psqlQueryVariables = [exerciseId]
-            const newEntry = await LifeTrackerResourceModel.fetchResourceEntryById(psqlQuery, psqlQueryVariables)
+            const newEntry = await LifeTrackerResourceModel.fetchResourceEntryById("exercise", exerciseId)
             return newEntry
         } catch (error) {
             throw error;
@@ -54,25 +46,15 @@ class Exercise /* extends LifeTrackerResourceModel */ {
     }
     static async listExerciseForUser(userId) {
         try {
-            const psqlQuery =  `SELECT id, 
-                                user_id AS "userId",
-                                name,
-                                category,
-                                calories_burned AS "caloriesBurned",
-                                duration,
-                                id,
-                                created_at AS "createdAt"
-                                FROM exercise WHERE user_id=$1 `
-            const psqlQueryVariables = [userId]
-            const exerciseEntries = await LifeTrackerResourceModel.listResourceEntriesForUser(psqlQuery, psqlQueryVariables)
+            const exerciseEntries = await LifeTrackerResourceModel.listResourceEntriesForUser("exercise", userId)
             return exerciseEntries
         } catch (error) {
             throw error;
         }
     }
-    static async fetchExerciseStats(userId, statId){
+    static async fetchExerciseStats(userId, statId) {
         try {
-            const exerciseStats = await LifeTrackerResourceModel.fetchResourceStats("exercise",  userId, statId)
+            const exerciseStats = await LifeTrackerResourceModel.fetchResourceStats("exercise", userId, statId)
             return exerciseStats;
         } catch (error) {
             console.log("error getting stats: ", error)

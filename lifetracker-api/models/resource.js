@@ -15,7 +15,6 @@ class LifeTrackerResourceModel {
             throw err
         }
         try {
-
             const result = await db.query(psqlQuery, psqlQueryVariables)
             return result.rows[0]
         } catch (error) {
@@ -23,18 +22,26 @@ class LifeTrackerResourceModel {
             throw error;
         }
     }
-    static async fetchResourceEntryById(psqlQuery, psqlQueryVariables) {
+    static async fetchResourceEntryById(resourceType, entryID) {
         try{
-            const result = await db.query(psqlQuery, psqlQueryVariables)
+            const result = await db.query(
+                `SELECT *
+                FROM ` + resourceType.toLowerCase() + ` WHERE id = $1`,
+                [entryID.toLowerCase()]
+            )
             return result.rows[0]
         }catch (error){
             console.log("unable to fetch resource: ", resourceType, "by id: ", entryID)
             throw error;
         }
     }
-    static async listResourceEntriesForUser(psqlQuery, psqlQueryVariables) {
+    static async listResourceEntriesForUser(resourceType, userId) {
+        console.log("prepare list request", resourceType, userId)
         try{
-            const result = await db.query(psqlQuery, psqlQueryVariables)
+            const result = await db.query(
+                `SELECT * FROM ` + resourceType.toLowerCase() + ` WHERE user_id=$1 `
+                , [userId]
+            )
             return result.rows // returns list of nutrition objects
         }catch (error) {
             console.log("unable to fetch entries for resource type:", resourceType)
