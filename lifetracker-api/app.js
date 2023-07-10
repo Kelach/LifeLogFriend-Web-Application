@@ -21,7 +21,7 @@ app.use(morgan("tiny")); // console logging
 app.use("/auth", authRouter); // authentication routes handler
 app.use("/nutrition", requireAuthenticatedUser, nutritionRouter);
 app.use("/exercise",requireAuthenticatedUser, exerciseRouter);
-app.use("/sleep", requireAuthenticatedUser, );
+app.use("/sleep", requireAuthenticatedUser, sleepRouter);
 app.use("/following", requireAuthenticatedUser, followingRouter);
 
 // ROUTES
