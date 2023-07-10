@@ -11,9 +11,11 @@ import UsersPage from "../../pages/UsersPage/UsersPage";
 import Navbar from "../Navbar/Navbar";
 import NutritionOverview from "../Nutrition/NutritionOverview";
 import NutritionForm from "../Nutrition/NutritionForm";
-import NutritionDetail from "../../pages/ResourceDetailsPage.jsx/ResourceDetailsPage";
+
 import ExerciseOverview from "../Exercise/ExerciseOverview";
 import ExerciseForm from "../Exercise/ExerciseForm";
+import SleepOverview from "../Sleep/SleepOverview";
+import SleepForm from "../Sleep/SleepForm";
 import './App.css';
 import ApiClient from "../../../services/apiClient";
 import ResourceDetailsPage from "../../pages/ResourceDetailsPage.jsx/ResourceDetailsPage";
@@ -103,7 +105,11 @@ function App() {
               <Route path="/exercise/create" element={<ExerciseForm user={appState.user} setAppState={setAppState} />} />
               <Route path="/exercise/id/:exerciseId" element={<ResourceDetailsPage resourceType="exercise" isAuthenticated={appState.isAuthenticated} />} />
             </Route>
-            <Route path="/sleep" element={<SleepPage />} />
+            <Route path="/sleep" element={<SleepPage {...appState} />}>
+              <Route path="/sleep/" element={<SleepOverview {...appState} />} s />
+              <Route path="/sleep/create" element={<SleepForm user={appState.user} setAppState={setAppState} />} />
+              <Route path="/sleep/id/:sleepId" element={<ResourceDetailsPage resourceType="sleep" isAuthenticated={appState.isAuthenticated} />} />
+            </Route>
             <Route path="/users" element={<UsersPage {...appState} />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
