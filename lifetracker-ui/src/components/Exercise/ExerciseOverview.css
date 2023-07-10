@@ -1,23 +1,19 @@
-.nutrition-details-section {
+.exercise-details-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0rem 10rem 0rem 10rem;
 }
-
-.add-nutrition-btn.btn-outline-large {
-    margin: 0;
-    margin-bottom: 2rem;
+.add-exercise-btn{
+    margin: 1rem 0rem;
 }
-
-.add-nutrition-btn a {
+.add-exercise-btn a{
     display: flex;
-    margin: 0;
 }
-
-.nutrition-history {
+.exercise-history{
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
+
