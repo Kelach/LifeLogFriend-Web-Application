@@ -6,14 +6,7 @@ import ApiClient from "../../../services/apiClient";
 import { useNavigate } from "react-router-dom";
 
 export default function NutritionForm({ setAppState, user}) {
-    /**
-     * @todo
-     * - fix circle loader to show error and success animations
-     * - make nutrition details page using a general details component (pulling dummy data)
-     * 
-     * - make pseudo backend call to db to update nutrition
-     * - start working on API state management
-     */
+
     const navigate = useNavigate();
     const [formOnSubmitState, setFormOnSubmitState] = useState({
         showLoader: false,
@@ -34,12 +27,11 @@ export default function NutritionForm({ setAppState, user}) {
     const showErrorLoader = () => {
         setFormOnSubmitState(() => ({ ...formOnSubmitState, showErrorLoader: true }));
     }
-    const showErrorMessage = (msg) => {
-    }
-    const loaderStates = {
-        success: !formOnSubmitState.showErrorLoader && formOnSubmitState.showSuccess,
-        failure: formOnSubmitState.showErrorLoader && !formOnSubmitState.showSuccess
-    }
+    // Used for activity loader
+    // const loaderStates = {
+    //     success: !formOnSubmitState.showErrorLoader && formOnSubmitState.showSuccess,
+    //     failure: formOnSubmitState.showErrorLoader && !formOnSubmitState.showSuccess
+    // }
     const [formData, setFormData] = useState({
         name: "",
         calories: "",

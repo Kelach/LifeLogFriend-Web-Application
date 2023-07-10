@@ -4,7 +4,7 @@ import { getTimeFromTimestamp } from "../../utils/timeUtils.js"
 export default function ResourceCard({ linkTo, imageUrl, name, createdAt, cardDetails }) {
     
     return (
-        <div className="resource-card">
+        <div className="resource-card" key={linkTo}>
             <Link to={linkTo} >
                 <div className="resource-card-content box-shadow">
                     <div className="resource-card-details">
@@ -21,7 +21,7 @@ export default function ResourceCard({ linkTo, imageUrl, name, createdAt, cardDe
                         <div className="resource-card-details-summary">
                             {cardDetails.map((entry, index) => {
                                 return (
-                                    <p key={entry.createdAt}>
+                                    <p key={`${entry.createdAt} ${index}`}>
                                         <span key={`${entry.name}${index}`} style={{ textTransform: "capitalize" }}>
                                             {entry.name}:</span> {entry.value}
                                     </p>

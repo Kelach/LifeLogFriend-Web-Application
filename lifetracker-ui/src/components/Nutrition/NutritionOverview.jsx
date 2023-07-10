@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import ResourceCard from "../ResourceCard/ResourceCard";
 import "./NutritionOverview.css";
 import ApiClient from "../../../services/apiClient";
+import DropdownFilter from "../DropdownFilter/DropdownFilter";
 
 export default function NutritionOverview({ user }) {
     const [nutritionEntries, setNutritionEntries] = useState([]);
+    const [activeOption, setActiveOption] = useState("All");
     useEffect(() => {
         const getNutritionEntries = async () => {
             const {success, data, statusCode} = await ApiClient.fetchEntries("nutrition", user?.email);
@@ -18,6 +20,7 @@ export default function NutritionOverview({ user }) {
         }
         getNutritionEntries();
     }, []);
+
     const getCardObjFromEntry = (entry) => {
         // converts nutrition entries list into card objects
         // that can be passed down to ResourceCard comp
@@ -25,23 +28,24 @@ export default function NutritionOverview({ user }) {
             name: entry.name,
             createdAt: entry.createdAt,
             cardDetails:[
-                {
-                    name: "calories",
-                    value: entry.calories
-                },
-                {
-                    name: "quantity",
-                    value: entry.quantity
-                },
-                {
-                    name: "category",
-                    value: entry.category
-                }
+                {name: "calories", value: entry.calories},
+                {name: "quantity", value: entry.quantity},
+                {name: "category", value: entry.category}
             ]
         };
     }
+    const dropdownFilterOptions = ["Food", "Beverage", "Snack", "All"];
+    const onOptionsChange = (event) => {
+        setActiveOption(() => event.target.value);
+    }
     return (
         <div className="nutrition-details-section">
+            <DropdownFilter
+            onOptionsChange={onOptionsChange}
+            label={"Filter by Category"}
+            name={"Category"}
+            options={dropdownFilterOptions}/>
+
             <div className="add-nutrition-btn">
                 <Link to={"/nutrition/create"}>
                     <button  className="add-nutition-btn btn-outline-large">
@@ -52,15 +56,15 @@ export default function NutritionOverview({ user }) {
             <div className="nutrition-history">
                 {nutritionEntries.map((entry, index) => {
                     const nutritionCardObj = getCardObjFromEntry(entry);
-                    return (
-                        <ResourceCard linkTo={`id/${entry.id}`} key={entry.id} {...nutritionCardObj} />
-                    )
-                })}
-                {/* <ResourceCard name="Burger"
-                    calories={"900"}
-                    createdAt={"timestamp here"}
-                    quantity={"quantity here"}
-                    category={"Food"} /> */}
+
+                    return nutritionCardObj.cardDetails[2].value === activeOption || activeOption === "All" ?
+                     (<ResourceCard 
+                        linkTo={`id/${entry.id}`} 
+                        key={entry.id} 
+                        {...nutritionCardObj} />) :
+                    (<></>)
+                })
+                }
             </div>
         </div>
     )

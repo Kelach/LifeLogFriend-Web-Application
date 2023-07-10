@@ -29,8 +29,8 @@ export default function ResourceDetailsPage({ resourceType, isAuthenticated }) {
                     entryProperties: props
                 });
             } else{
-                if (statusCode == 1){
-
+                if (statusCode == 401){
+                    setHasPermission(false);
                 }else{
                     console.log("unable to set resource, ", resourceType," by id. error ", error)
                 }
@@ -39,7 +39,8 @@ export default function ResourceDetailsPage({ resourceType, isAuthenticated }) {
         fetchResourceById();
     }, [])
 
-    return (
+   return hasPermission ? (
+        
         <div className="resource-entry-container">
             <div className="resource-entry-content box-shadow">
 
@@ -62,11 +63,7 @@ export default function ResourceDetailsPage({ resourceType, isAuthenticated }) {
             <button className="btn-outline-large go-back-btn">Go Back</button>
             </Link>
         </div>
+    ) : (
+        <ForbiddenPage noPermission={true} />
     )
-    /**
-     * @TODO 
-     * - get product if user is verified, otherwise show unauth display
-     * - display product
-     * - 
-     */
 }
