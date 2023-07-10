@@ -13,10 +13,9 @@ export default function SleepForm({ setAppState, user }) {
 
     const [formData, setFormData] = useState({
         name: "",
-        calories_burned: "",
-        category: "Workout",
+        category: "Nap",
         start_time: "0:0",
-        end_time: "0:0"
+        end_time: "0:0",
     });
 
     const onSleepFormSubmit = async (event) => {
@@ -24,7 +23,7 @@ export default function SleepForm({ setAppState, user }) {
 
         // calculating duration
         const {start_time, end_time, ...payload} = formData;
-        let duration = (fetchMinutes(end_time) - fetchMinutes(start_time))*60 
+        let duration = (fetchMinutes(end_time) - fetchMinutes(start_time)) / 60
         duration = duration > 0 ? duration : undefined
 
         // making request
@@ -32,8 +31,10 @@ export default function SleepForm({ setAppState, user }) {
             await ApiClient.postEntry("sleep",
                 {
                     ...payload,
-                    duration: duration,
-                    userId: user.email
+                    duration: duration.toFixed(2),
+                    user_id: user.email,
+                    start_time: fetchMinutes(start_time),
+                    end_time: fetchMinutes(end_time)
                 }
             );
         

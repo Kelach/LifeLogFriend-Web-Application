@@ -26,10 +26,10 @@ export default function ExerciseOverview({ user }) {
         // that can be passed down to ResourceCard comp
         return {
             name: entry.name,
-            createdAt: entry.createdAt,
+            created_at: entry.created_at,
             cardDetails:[
-                {name: "calories burned", value: entry.caloriesBurned},
-                {name: "duration (hours)", value: (parseInt(entry.duration) / 3600).toFixed(2)},
+                {name: "calories burned", value: entry.calories_burned},
+                {name: "duration (hours)", value: entry.duration},
                 {name: "category", value: entry.category}
             ]
         };

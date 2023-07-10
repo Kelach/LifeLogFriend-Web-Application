@@ -23,7 +23,7 @@ export default function ExerciseForm({ setAppState, user }) {
 
         // calculating duration
         const {start_time, end_time, ...payload} = formData;
-        let duration = (fetchMinutes(end_time) - fetchMinutes(start_time))*60 
+        let duration = (fetchMinutes(end_time) - fetchMinutes(start_time)) / 60 ;
         duration = duration > 0 ? duration : undefined
 
         // making request

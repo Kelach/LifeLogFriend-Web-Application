@@ -26,11 +26,11 @@ export default function SleepOverview({ user }) {
         // that can be passed down to ResourceCard comp
         return {
             name: entry.name,
-            createdAt: entry.createdAt,
+            created_at: entry.created_at,
             cardDetails:[
-                {name: "start time", value: entry.startTime},
-                {name: "end time", value: entry.endTime},
-                {name: "duration (hours)", value: (parseInt(entry.duration) / 3600).toFixed(2)},
+                {name: "start time", value: entry.start_time},
+                {name: "end time", value: entry.end_time},
+                {name: "duration (hours)", value: entry.duration},
                 {name: "category", value: entry.category}
             ]
         };
@@ -58,7 +58,7 @@ export default function SleepOverview({ user }) {
                 {sleepEntries.map((entry, index) => {
                     const sleepCardObj = getCardObjFromEntry(entry);
 
-                    return sleepCardObj.cardDetails[2].value === activeOption || activeOption === "All" ?
+                    return sleepCardObj.cardDetails[3].value === activeOption || activeOption === "All" ?
                      (<ResourceCard 
                         linkTo={`id/${entry.id}`} 
                         key={entry.id} 

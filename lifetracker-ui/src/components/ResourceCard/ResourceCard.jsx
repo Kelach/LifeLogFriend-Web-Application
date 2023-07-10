@@ -1,8 +1,7 @@
 import "./ResourceCard.css";
 import { Link } from "react-router-dom"
 import { getTimeFromTimestamp } from "../../utils/timeUtils.js"
-export default function ResourceCard({ linkTo, imageUrl, name, createdAt, cardDetails }) {
-    
+export default function ResourceCard({ linkTo, imageUrl, name, created_at, cardDetails }) {
     return (
         <div className="resource-card" key={linkTo}>
             <Link to={linkTo} >
@@ -14,7 +13,7 @@ export default function ResourceCard({ linkTo, imageUrl, name, createdAt, cardDe
                             </h3>
                             <div className="card-timestamp">
                                 <p>
-                                    {getTimeFromTimestamp(createdAt)}
+                                    {getTimeFromTimestamp(created_at)}
                                 </p>
                             </div>
                         </div>

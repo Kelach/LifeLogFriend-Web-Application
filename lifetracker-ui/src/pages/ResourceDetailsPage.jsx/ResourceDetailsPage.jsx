@@ -9,7 +9,7 @@ export default function ResourceDetailsPage({ resourceType, isAuthenticated }) {
     const [hasPermission, setHasPermission] = useState(true)
     const [resourceEntry, setResourceEntry] = useState({
         name: "",
-        createdAt: "0",
+        created_at: "0",
         entryProperties: {}
     });
 
@@ -20,12 +20,12 @@ export default function ResourceDetailsPage({ resourceType, isAuthenticated }) {
                 await ApiClient.fetchEntryById(resourceType, params[`${resourceType}Id`]);
                 console.log("retrieved data: ", data)
             if (success){
-                const {name, createdAt, id, userId, ...props} = data[resourceType] // destructuring id,userId to prevent it from being displayed
+                const {name, created_at, id, user_id, ...props} = data[resourceType] // destructuring id,userId to prevent it from being displayed
                 // update entry with name, timestamp
                 // and remaining properties (e.g. category, quantity)
                 setResourceEntry({
                     name: name,
-                    createdAt: createdAt,
+                    created_at: created_at,
                     entryProperties: props
                 });
             } else{
@@ -46,13 +46,13 @@ export default function ResourceDetailsPage({ resourceType, isAuthenticated }) {
 
                 <div className="entry-header-container">
                     <h1>{resourceEntry.name}</h1>
-                    <p>Created: {getTimeFromTimestamp(resourceEntry.createdAt)}</p>
+                    <p>Created: {getTimeFromTimestamp(resourceEntry.created_at)}</p>
                 </div>
                 <div className="entry-details-container">
                     {Object.keys(resourceEntry.entryProperties).map((entryProp, index) => {
                         return (
                     <div key={entryProp} className="entry-details-row light-text-hover">
-                        <p>{entryProp}:</p>
+                        <p>{entryProp.replace("_", " ")}:</p>
                         <p>{resourceEntry.entryProperties[entryProp]}</p>
                     </div>
                         ) 
