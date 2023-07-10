@@ -48,7 +48,7 @@ export default function NutritionOverview({ user }) {
 
             <div className="add-nutrition-btn">
                 <Link to={"/nutrition/create"}>
-                    <button  className="add-nutition-btn btn-outline-large">
+                    <button  className="add-nutrition-btn btn-outline-large">
                         Add Nutrition
                     </button>
                 </Link>
