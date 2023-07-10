@@ -18,8 +18,7 @@ class LifeTrackerResourceModel {
         try {
 
             const result = await db.query(
-                `
-                INSERT INTO ` + resourceType.toLowerCase() +  ` (
+                `INSERT INTO ` + resourceType.toLowerCase() +  ` (
                     user_id,
                     name,
                     category,

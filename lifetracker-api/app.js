@@ -6,6 +6,7 @@ const cors = require("cors");
 // ROUTES + CONFIGS
 const authRouter = require("./routes/auth");
 const nutritionRouter = require("./routes/nutrition");
+const followingRouter = require("./routes/following");
 const { IS_TESTING } = require("./utils/config");
 const { NotFoundError } = require("./utils/errors");
 const { requireAuthenticatedUser } = require("./middleware/security");
@@ -16,9 +17,10 @@ app.use(cors()); // cross origin resource sharing *need to restrict only to orig
 app.use(express.json()); // json pre-processing
 app.use(morgan("tiny")); // console logging
 app.use("/auth", authRouter); // authentication routes handler
-app.use("/nutrition", requireAuthenticatedUser, nutritionRouter);  // @TODO - include security middleware
-app.use("/exercise",requireAuthenticatedUser, nutritionRouter);  // @TODO - include security middleware
-app.use("/sleep", requireAuthenticatedUser, nutritionRouter);  // @TODO - include security middleware
+app.use("/nutrition", requireAuthenticatedUser, nutritionRouter);
+app.use("/exercise",requireAuthenticatedUser, );
+app.use("/sleep", requireAuthenticatedUser, );
+app.use("/following", requireAuthenticatedUser, followingRouter);
 
 // ROUTES
 

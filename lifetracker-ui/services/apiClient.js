@@ -69,6 +69,31 @@ class ApiClient {
         }
         return this.request(requestOptions)
     }
+
+    async fetchFollowing(){
+        const requestOptions = {
+            method: "get",
+            subDirectory: "/following"
+        };
+        return this.request(requestOptions)
+    }
+    async unfollowUser(userToUnfollowEmail){
+        console.log("sending delete req to unfolow user: ", userToUnfollowEmail)
+        const requestOptions = {
+            method: "delete",
+            bodyData: { userToUnfollowEmail : userToUnfollowEmail },
+            subDirectory: "/following"
+        }
+        return this.request(requestOptions)
+    }
+    async followUser(userToFollowEmail){
+        const requestOptions = {
+            method: "post",
+            bodyData: { userToFollowEmail : userToFollowEmail },
+            subDirectory: "/following"
+        }
+        return this.request(requestOptions)
+    }
     async postEntry(entryType, entryData) {
         // handles posting new entries to nutrition, sleep, and exercise
         const requestOptions = {
@@ -79,7 +104,7 @@ class ApiClient {
         return this.request(requestOptions);
     }
     async deleteEntry(entryType, entryData) {
-        // handles posting new entries to nutrition, sleep, and exercise
+        // handles deleting new entries to nutrition, sleep, and exercise
         const requestOptions = {
             method: "post",
             bodyData: entryData,

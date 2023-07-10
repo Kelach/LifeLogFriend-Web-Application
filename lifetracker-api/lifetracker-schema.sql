@@ -17,6 +17,12 @@ CREATE TABLE nutrition(
     user_id TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL
 );
+CREATE TABLE following(
+    id SERIAL PRIMARY KEY,
+    follows TEXT NOT NULL,
+    user_id TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
 -- CREATE TABLE sleep(
 --     id SERIAL PRIMARY KEY,
 --     name TEXT NOT NULL,
@@ -25,7 +31,7 @@ CREATE TABLE nutrition(
 --     image_url TEXT NOT NULL,
 --     user_id TEXT NOT NULL,
 --     created_at TIMESTAMP NOT NULL,
--- )
+-- );
 -- CREATE TABLE exercise(
 --     id SERIAL PRIMARY KEY,
 --     name TEXT NOT NULL,
@@ -34,4 +40,4 @@ CREATE TABLE nutrition(
 --     image_url TEXT NOT NULL,
 --     user_id TEXT NOT NULL,
 --     created_at TIMESTAMP NOT NULL,
--- )
+-- );

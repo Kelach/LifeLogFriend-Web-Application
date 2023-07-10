@@ -1,6 +1,7 @@
 const express = require("express");
 const nutritionRouter = express.Router();
 const { authedUserOwnsResource } = require("../middleware/permissions");
+
 /**
  * @todo
  * - complete permissions middleware (currently need to console log request so i can find path)
@@ -21,7 +22,7 @@ nutritionRouter.post("/", async (request, response, next) => {
         next(error);
     }
 
-})
+});
 nutritionRouter.get("/", async (request, response, next) => {
     console.log("received nutriton get request");
     try {
@@ -33,7 +34,7 @@ nutritionRouter.get("/", async (request, response, next) => {
         next(error);
     }
 
-})
+});
 nutritionRouter.post("/stats", async (request, response, next) => {
     console.log("received nutriton stats request");
     try {
